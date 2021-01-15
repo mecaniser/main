@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import EnrollwFido from "./Enroll-w-Fido";
+import EnrollwFido from "./components/Enroll-w-Fido";
 
 function App() {
   return (
