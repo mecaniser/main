@@ -32197,7 +32197,7 @@
                         this.completeAuthenticationWithError(
                           new t.impl.AuthenticationErrorImpl(
                             t.AuthenticationErrorCode.Internal,
-                            "No supported authenticator listed in registeration request."
+                            "No supported authenticator listed in registration request."
                           )
                         );
                     }),
