@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import ActionButton from "./ActionButton";
+// test page https://sit-connect.secure.evetest.wellsfargo.com:23611/transmit/static/olbtestapp/testWebApp.html
 var sdk = new xmsdk.XmSdk();
 var UiHandler = new xmui.XmUIHandler()
 
@@ -36,7 +37,7 @@ const EnrollWithFido2 = () => {
       });
     
     sdk.setUiHandler(UiHandler);
-    
+
   }, []);
  
   const fidoJourney = (journey) => {
