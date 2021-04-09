@@ -1,5 +1,5 @@
-import * as types from "../types";
+import * as type from "../types";
 
-export default function getUsers(users) {
+export function getUsers(users) {
   return { type: type.GET_USERS, payload: users };
 }
