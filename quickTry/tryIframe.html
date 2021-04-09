@@ -1,0 +1,24 @@
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button onclick="doStuff()">Do stuff</button>
+      <section>
+        <h1>My Iframe</h1>
+        <iframe id="myIframe" name="nameOfTheIframe" src="./tryIframeContent.html" frameborder="1" ></iframe>
+      </section>
+    </div>
+    <script >
+        const iframe = document.getElementById("myIframe")
+        const doStuff = () =>{ 
+            const myIframe = iframe.contentWindow
+            
+            console.log(myIframe.name);
+            myIframe.name = "nameChanged"
+            console.log(myIframe.name);
+        
+        }
+    </script>
+  </body>
+

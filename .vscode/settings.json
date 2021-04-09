@@ -1,0 +1,21 @@
+{
+    "liveServer.settings.https": {
+        "enable": true, //set it true to enable the feature.  
+        "cert": "C:\\Users\\sergi\\Desktop\\certs", //full path of the certificate  
+        // "key": "D:\\https\\private.key",
+        //full path of the private key  
+        "passphrase": "12345"
+    },
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "javascript"
+    ],
+    "cSpell.ignoreWords": [
+        "svg"
+    ]
+}
