@@ -1,21 +1,12 @@
 import React from "react";
 import RD from "react-dom";
-
-const TodoList = () => {
-  const items = ["Learn React Like a Pro", "Build your own applications"]
-  return (
-    <ul>
-      <li>{items[0]}</li>
-      <li>{items[1]}</li>
-    </ul>
-  );
-};
-
-const AppHeader = () => <h1>My TODO list </h1>;
-const SearchPanel = () => <input placeholder="search" />;
+import AppHeader from "./components/app-header";
+import SearchPanel from "./components/search-panel";
+import TodoList from "./components/todo-list";
 const App = () => {
   return (
     <div>
+      <span>{new Date().toString()}</span>
       <AppHeader />
       <SearchPanel />
       <TodoList />
