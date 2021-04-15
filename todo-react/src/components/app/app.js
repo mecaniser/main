@@ -11,12 +11,19 @@ export default class App extends Component {
 
   state = {
     todoData: [
-      { label: "Drink Coffee", important: false, id: 1 },
-      { label: "Make Awesome App", important: true, id: 2 },
-      { label: "Have a lunch", important: false, id: 3 },
+      this.creatToDoItem("Drink Coffee"),
+      this.creatToDoItem("Make Awesome App"),
+      this.creatToDoItem("Have a lunch")
     ],
   };
-
+  creatToDoItem(label) {
+    return {
+      label,
+      important: false,
+      done: false,
+      id: this.maxId++,
+    };
+  };
   deleteItem = (id) => {
     this.setState(({ todoData }) => {
       const idx = todoData.findIndex((el) => el.id === id);
