@@ -1,21 +1,43 @@
 import React, { Component } from "react";
 import "./new-list-item.css";
 
-export default class NewListItem extends Component {
-  
+export default class NewListItemForm extends Component {
+  state = {
+    label: "",
+  };
+
+  onLabelChange = (e) => {
+    this.setState(() => {
+      return { label: e.target.value };
+    });
+  };
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.props.onNewItem(this.state.label);
+    this.setState(() => {
+      return { label: "" };
+    });
+  };
+
   render() {
-    const { onNewItem } = this.props;
+    const { label } = this.state;
 
     return (
-      <div className="new-list-item">
+      <form className="new-list-item d-flex" onSubmit={this.onSubmit}>
+        <input
+          onChange={this.onLabelChange}
+          className="form-control"
+          type="text"
+          value={label}
+          placeholder="Do this next..."
+        ></input>
         <button
-          type="button"
+          type="submit"
           className="btn btn-outline-primary btn-sm float-right"
-          onClick={onNewItem}
         >
           <i className="fa fa-plus" />
         </button>
-      </div>
+      </form>
     );
   }
 }
