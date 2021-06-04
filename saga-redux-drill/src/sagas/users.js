@@ -6,6 +6,7 @@ import * as useApiTo from "../api/users";
 function* getUsers() {
   try {
       const result = yield call(useApiTo.getUsers)
+      console.log(result.data);
   } catch (error) {}
 }
 
