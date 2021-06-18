@@ -1,5 +1,30 @@
 .rmBtn {
-    background-color: #ff6060;
-    border-radius: 4px;
-    border: none;
+  background-color: #ff6060;
+  border-radius: 4px;
+  border: none;
+}
+.addBtn {
+  background-color: #60a5ff;
+  border-radius: 4px;
+  border: none;
+  margin-left: 0.5rem;
+}
+
+.inputField {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #60a5ff;
+  margin-right: 0.5rem;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    padding-top: .5rem;
 }
