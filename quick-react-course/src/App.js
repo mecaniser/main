@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import ToDoList from './components/ToDoList';
 import ToDoContext from './context/ToDoContext';
 import Loader from './components/loader'
+import AddItemLoader from './components/AddItemLoader'
 
 const AddItem = lazy(() => new Promise(resolve => {
   setTimeout(() => {
@@ -53,10 +54,9 @@ function App() {
             : <h4>Your <i>To do</i> list is empty!</h4>
         }
 
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<AddItemLoader />}>
           <AddItem />
         </Suspense>
-
       </div>
     </ToDoContext.Provider>
   );
