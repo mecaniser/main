@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import ToDoContext from "../context/ToDoContext";
 
 import "./ToDoItem.css";
 
-const ToDoItem = ({ todo, index }) => {
+const ToDoItem = ({ todo, index, onInputChange }) => {
+
+  const { removeItem } = useContext(ToDoContext);
+
+  const classes = []
+
+  todo.completed && classes.push('done')
+
   const styles = {
     li: {
       display: "flex",
@@ -24,12 +32,12 @@ const ToDoItem = ({ todo, index }) => {
 
   return (
     <li style={styles.li}>
-      <span>
-        <input style={styles.input} type="checkbox" />
+      <span className={classes.join(" ")}>
+        <input style={styles.input} type="checkbox" onChange={() => onInputChange(todo.id)} checked={todo.completed} value={todo.completed} />
         <b style={styles.b}>{index + 1}</b>
         {todo.title}
       </span>
-      <button className='rmBtn'> &times; </button>
+      <button onClick={removeItem.bind(null, todo.id)} className='rmBtn'> &times; </button>
     </li>
   );
 };
@@ -37,5 +45,6 @@ const ToDoItem = ({ todo, index }) => {
 ToDoItem.propTypes = {
   todo: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
+  onInputChange: PropTypes.func.isRequired,
 };
 export default ToDoItem;
