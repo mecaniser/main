@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ToDoList from './components/ToDoList';
 import ToDoContext from './context/ToDoContext';
 import AddItem from './components/AddToDoItem';
+import Loader from './components/loader'
 
 function App() {
 
-  const [todos, setTodos] = useState([
-    { id: 1, completed: false, title: "Move to the right" },
-    { id: 2, completed: false, title: "Move to the left" },
-    { id: 3, completed: false, title: "Move forward" },
-  ]);
+  const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=6')
+      .then(response => response.json())
+      .then(todos => {
+        setTimeout(() => {
+          setTodos(todos, console.log(todos))
+          setLoading(false)
+        }, 3000)
+      })
+  }, []);
 
   const itemChecked = id => {
     setTodos(
@@ -33,9 +42,14 @@ function App() {
     <ToDoContext.Provider value={{ removeItem, onCreate }}>
       <div className="wrapper">
         <h1>To Do List Page</h1>
-        {todos.length > 0 ? <ToDoList todos={todos} onInputCheck={itemChecked} /> : <h4>Your <i>To do</i> list is empty!</h4>
+        {todos.length > 0
+          ? <ToDoList todos={todos} onInputCheck={itemChecked} />
+          : loading
+            ? <Loader />
+            : <h4>Your <i>To do</i> list is empty!</h4>
         }
         <AddItem />
+
       </div>
     </ToDoContext.Provider>
   );
