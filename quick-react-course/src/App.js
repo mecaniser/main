@@ -4,6 +4,8 @@ import ToDoContext from './context/ToDoContext';
 import Loader from './components/loader'
 import AddItemLoader from './components/AddItemLoader'
 
+import Modal from './components/Modal/Modal'
+
 const AddItem = lazy(() => new Promise(resolve => {
   setTimeout(() => {
     resolve(import('./components/AddToDoItem'))
@@ -47,13 +49,13 @@ function App() {
     <ToDoContext.Provider value={{ removeItem, onCreate }}>
       <div className="wrapper">
         <h1>To Do List Page</h1>
+        <Modal />
         {todos.length > 0
           ? <ToDoList todos={todos} onInputCheck={itemChecked} />
           : loading
             ? <Loader />
             : <h4>Your <i>To do</i> list is empty!</h4>
         }
-
         <Suspense fallback={<AddItemLoader />}>
           <AddItem />
         </Suspense>
