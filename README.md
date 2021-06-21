@@ -1,3 +1,3 @@
 # main
 
-Multiple minor projects to acumulate knowledge.
+Multiple minor projects to accumulate knowledge.
