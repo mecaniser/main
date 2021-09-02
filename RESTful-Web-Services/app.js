@@ -11,8 +11,18 @@ const Book = require('./models/bookModel')
 const bookRouter = express.Router()
 
 bookRouter.route("/books").get((req, res) => {
-    Book.find((err, books) => {
+    const query = {}
+    if (req.query.genre) query.genre = req.query.genre
+
+    Book.find(query, (err, books) => {
         err ? res.send(err) : res.json(books)
+    })
+})
+bookRouter.route("/books/:bookId").get((req, res) => {
+    const query = req.params.bookId
+
+    Book.findById(query, (err, book) => {
+        err ? res.send(err) : res.json(book)
     })
 })
 
