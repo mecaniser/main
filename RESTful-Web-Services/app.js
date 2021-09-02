@@ -11,8 +11,9 @@ const Book = require('./models/bookModel')
 const bookRouter = express.Router()
 
 bookRouter.route("/books").get((req, res) => {
-    const response = { hi: "This is my API" }
-    res.json(response)
+    Book.find((err, books) => {
+        err ? res.send(err) : res.json(books)
+    })
 })
 
 app.use("/api", bookRouter)
