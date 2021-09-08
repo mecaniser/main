@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 
 const app = express()
 let db;
-process.env.ENV === "Test" ? (db = mongoose.connect('mongodb://localhost/bookAPI_Test'), console.log("Test API")) :  (db = mongoose.connect('mongodb://localhost/bookAPI_Prod'), console.log("Prod API"))
+process.env.ENV === "Test" ? (db = mongoose.connect('mongodb://localhost/bookAPI_Test'), console.log("Test API")) :  (db = mongoose.connect('mongodb://localhost/bookAPI'), console.log("Prod API"))
 const debug = require('debug')('app')
 const port = process.env.PORT || 3000
 
