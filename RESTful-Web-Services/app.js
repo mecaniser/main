@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 
 const app = express()
-const db = mongoose.connect('mongodb://localhost/bookAPI')
+let db;
+process.env.ENV === "Test" ? (db = mongoose.connect('mongodb://localhost/bookAPI_Test'), console.log("Test API")) :  (db = mongoose.connect('mongodb://localhost/bookAPI_Prod'), console.log("Prod API"))
 const debug = require('debug')('app')
 const port = process.env.PORT || 3000
 
@@ -20,6 +21,8 @@ app.get('/', (req, res) => {
     res.send("Well here we go again")
 })
 
-app.listen(port, () => {
+app.server = app.listen(port, () => {
     debug("Running on port " + port)
 })
+
+module.exports = app;
