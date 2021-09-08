@@ -15,7 +15,13 @@ function booksControllers(Book) {
     const query = {}
     if (req.query.genre) query.genre = req.query.genre
     Book.find(query, (err, books) => {
-      err ? res.send(err) : res.json(books)
+      const returnedBooks = books.map((book)=>{
+        const newBook = book.toJSON()
+        newBook.links = {}
+        newBook.links.self = `http://${req.headers.host}/api/books/${book._id}`
+        return newBook
+      })
+      err ? res.send(err) : res.json(returnedBooks)
     })
   }
   return { post, get }

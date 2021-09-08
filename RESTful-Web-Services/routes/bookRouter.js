@@ -22,7 +22,13 @@ function routes(Book) {
     })
   })
   bookRouter.route("/books/:bookId")
-    .get((req, res) => res.json(req.book))
+    .get((req, res) => {
+      const returnedBook = req.book.toJSON()
+      const genre = req.book.genre.replace(" ", "%20")
+      returnedBook.links = {}
+      returnedBook.links.filteredByGenre = `http://${req.headers.host}/api/books/?genre=${genre}`
+      res.json(returnedBook)
+    })
     .put((req, res) => {
       const { book } = req;
       book.title = req.body.title
@@ -46,11 +52,11 @@ function routes(Book) {
       })
     })
     .delete((req, res) => {
-          debugger
-          req.book.remove((err) => {
-            err ? res.send(err) : res.sendStatus(204)
-          })
-        })
+      debugger
+      req.book.remove((err) => {
+        err ? res.send(err) : res.sendStatus(204)
+      })
+    })
   return bookRouter;
 }
 
