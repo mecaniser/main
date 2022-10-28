@@ -16,6 +16,14 @@
         "javascript"
     ],
     "cSpell.ignoreWords": [
+        "axios",
+        "btn",
+        "steelblue",
         "svg"
+    ],
+    "cSpell.words": [
+        "api",
+        "btn",
+        "steelblue"
     ]
 }
