@@ -21,13 +21,13 @@ export default class SwApiService {
       return res.results
     }
     getPlanet(id) {
-      return this.getRsrc(`/planet/${id}/`);
+      return this.getRsrc(`/planets/${id}/`);
     }
    async getAllStarShips() {
        const res = await this.getRsrc(`/starships/`);
       return res.results
     }
     getStarShip(id) {
-      return this.getRsrc(`/starship/${id}/`);
+      return this.getRsrc(`/starships/${id}/`);
     }
   }

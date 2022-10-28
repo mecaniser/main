@@ -4,6 +4,7 @@ module.exports = {
   devtool: 'source-map',
   devServer: {
     static: "./dist",
+    hot: true
   }, 
   module: {
     rules: [
