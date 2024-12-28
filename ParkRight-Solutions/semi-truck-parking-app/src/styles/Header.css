@@ -1,40 +1,22 @@
-.css */
+
 .header {
   background-color: #1a1a2e;
   color: white;
   text-align: center;
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Add shadow for distinct look */
-  border-bottom: 2px solid #b8860b; /* Add border for distinct look */
+  border-bottom: 1px solid #b8860b; /* Add border for distinct look */
   display: flex;
-  justify-content: space-between; /* Space out the content */
+  justify-content: center; /* Center the content horizontally */
   align-items: center; /* Center the content vertically */
   width: 100%;
   box-sizing: border-box;
+  position: relative; /* To position logo and nav-links absolutely */
 }
 
 .header h1 {
-  margin: 0;
-  font-size: 24px; /* Adjusted font size */
+  margin: 0 auto; /* Center the heading */
+  font-size: smaller; 
   text-shadow: 1px 1px 2px #000, 2px 2px 5px #555; /* 3D text shadow effect */
   font-family: 'Orbitron', sans-serif; /* Apply the Orbitron font */
-}
-
-.header .logo {
-  margin-right: 20px;
-}
-
-.header .nav-links {
-  display: flex;
-  gap: 15px;
-}
-
-.header .nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.header .nav-links a:hover {
-  text-decoration: underline;
 }
