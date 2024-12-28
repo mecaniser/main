@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1>Welcome to the Truck Parking App</h1>
+      <h1>Right Parking Solutions</h1>
       <p>Find and book parking spaces for your semi trucks.</p>
       <button onClick={handleLoginClick}>Login</button>
     </div>
