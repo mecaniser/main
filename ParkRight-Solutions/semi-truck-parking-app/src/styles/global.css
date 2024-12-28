@@ -1,0 +1,56 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #1a1a2e; /* Dark blue background */
+  color: white; /* White text for better contrast */
+}
+
+.home-container, .login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: white; /* Reversed to white */
+  color: #b8860b; /* Dark gold color for text */
+  border: 2px solid #b8860b; /* Dark gold border */
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #a67c00; /* Slightly darker gold for hover effect */
+  color: white; /* White text on hover */
+}
+
+a {
+  color: #b8860b; /* Dark gold color for links */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+  .home-container {
+    padding: 10px;
+  }
+
+  button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+  }
+}
