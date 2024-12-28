@@ -3,7 +3,7 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: Arial, sans-serif;
+  font-family: 'Orbitron', Arial, sans-serif; /* Apply Orbitron font globally */
   background-color: #1a1a2e; /* Dark blue background */
   color: white; /* White text for better contrast */
 }
