@@ -4,7 +4,7 @@ import '../styles/Header.css';
 const Header = () => {
   return (
     <header className="header">
-      <h1>Right Parking Solutions</h1>
+      <h1>Right Solution Truck Parking</h1>
     </header>
   );
 };
