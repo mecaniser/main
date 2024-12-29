@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <Card>
-        <img src="/logo.png" alt="Logo" className="logo" />
+        <img src="/logo.png" alt="Logo" className="logo-homePage" />
         <h1>Right Solution Truck Parking</h1>
         <p>Find and book parking spaces for your semi trucks.</p>
         <button onClick={handleLoginClick}>Login</button>
