@@ -24,7 +24,7 @@ const Register = () => {
   return (
     <div className="register-container">
       <Card>
-        <h2>Register</h2>
+        <h2>Create your account</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -44,7 +44,7 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Register</button>
+          <button className='register-button' type="submit">Register</button>
         </form>
         <p><a href="/login">Already have an account? Login</a></p>
       </Card>
