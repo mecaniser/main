@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Card from '../components/Card';
 import '../styles/global.css';
 
 const Home = () => {
@@ -11,10 +12,12 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <img src="/logo.png" alt="Logo" className="logo" />
-      <h1>Right Solution Truck Parking</h1>
-      <p>Find and book parking spaces for your semi trucks.</p>
-      <button onClick={handleLoginClick}>Login</button>
+      <Card>
+        <img src="/logo.png" alt="Logo" className="logo" />
+        <h1>Right Solution Truck Parking</h1>
+        <p>Find and book parking spaces for your semi trucks.</p>
+        <button onClick={handleLoginClick}>Login</button>
+      </Card>
     </div>
   );
 };
