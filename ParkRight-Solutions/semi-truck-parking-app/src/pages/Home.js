@@ -10,10 +10,6 @@ const Home = () => {
     navigate('/login');
   };
 
-  const handleRegisterClick = () => {
-    navigate('/register');
-  };
-
   return (
     <div className="home-container">
       <Card>
@@ -22,7 +18,7 @@ const Home = () => {
         <p>Find and book parking spaces for your semi trucks.</p>
         <div className="button-container">
           <button onClick={handleLoginClick}>Login</button>
-          <button onClick={handleRegisterClick}>Register</button>
+          <p><a className='register-link' href="/register">Register</a></p>
         </div>
       </Card>
     </div>
