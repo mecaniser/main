@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <p>&copy; 2023 Truck Parking App. All rights reserved.</p>
-      <p>Contact us: info@truckparkingapp.com</p>
+      <p>Contact us: info@rightparkingsolutions.com</p>
     </footer>
   );
 };
