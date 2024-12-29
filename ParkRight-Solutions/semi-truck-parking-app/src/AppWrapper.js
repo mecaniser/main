@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import TopNavBar from './components/TopNavBar';
 import Header from './components/Header';
 import Footer from './components/Footer';
 // import Dashboard from './pages/Dashboard';
@@ -15,7 +14,6 @@ const AppWrapper = () => {
   return (
     <>
       <Header />
-      {location.pathname !== '/' && <TopNavBar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

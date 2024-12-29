@@ -3,15 +3,14 @@
   background-color: #1a1a2e;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Add shadow for distinct look */
   border-bottom: 1px solid #b8860b; /* Add border for distinct look */
-  display: flex;
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
   width: 100%;
   box-sizing: border-box;
-  position: relative; /* To position logo and nav-links absolutely */
+  position: fixed; /* Fix the header at the top */
+  top: 0; /* Position it at the top */
+  z-index: 1000; /* Ensure it stays above other content */
 }
 
 .header h1 {
@@ -19,4 +18,20 @@
   font-size: smaller; 
   text-shadow: 1px 1px 2px #000, 2px 2px 5px #555; /* 3D text shadow effect */
   font-family: 'Orbitron', sans-serif; /* Apply the Orbitron font */
+}
+
+.logo-title {
+  justify-content: space-between; /* Space out the logo and title */
+  display: flex;
+  color: #b8860b; /* Dark gold color */
+}
+
+.header .logo-header img {
+  border-radius: 50%; /* Make the logo round */
+}
+/* Responsive styles */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 18px; /* Reduce font size on smaller screens */
+  }
 }
