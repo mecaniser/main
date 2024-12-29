@@ -4,7 +4,7 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: 'Orbitron', Arial, sans-serif; /* Apply Orbitron font globally */
-  background-color: #1a1a2e; /* Dark blue background */
+  background-color: #efeff1; /* Light background color */
   color: white; /* White text for better contrast */
 }
 
@@ -15,6 +15,7 @@ html, body {
   align-items: center;
   height: 100vh;
   text-align: center;
+  padding-top: 80px; /* Add padding to avoid content being hidden behind the fixed header */
 }
 
 .logo {
@@ -28,15 +29,14 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: white; /* Reversed to white */
-  color: #b8860b; /* Dark gold color for text */
-  border: 2px solid #b8860b; /* Dark gold border */
+  background-color: #b8860b; /* Dark gold color */
+  color: white;
+  border: none;
   border-radius: 5px;
 }
 
 button:hover {
   background-color: #a67c00; /* Slightly darker gold for hover effect */
-  color: white; /* White text on hover */
 }
 
 a {
