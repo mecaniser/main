@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import TopNavBar from './components/TopNavBar';
-import Header from './components/header';
+import Header from './components/Header';
 import Footer from './components/Footer';
 // import Dashboard from './pages/Dashboard';
 // import BookingPage from './pages/BookingPage';
