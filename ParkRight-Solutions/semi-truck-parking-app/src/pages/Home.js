@@ -11,6 +11,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
+      <img src="/logo.png" alt="Logo" className="logo" />
       <h1>Right Solution Truck Parking</h1>
       <p>Find and book parking spaces for your semi trucks.</p>
       <button onClick={handleLoginClick}>Login</button>
