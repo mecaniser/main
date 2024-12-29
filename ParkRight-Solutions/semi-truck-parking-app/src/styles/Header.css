@@ -1,7 +1,6 @@
 
 .header {
   background-color: #1a1a2e;
-  color: white;
   text-align: center;
   padding: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Add shadow for distinct look */
@@ -23,6 +22,7 @@
 .logo-title {
   justify-content: space-between; /* Space out the logo and title */
   display: flex;
+  align-items: center; /* Center the logo and title vertically */
   color: #b8860b; /* Dark gold color */
 }
 
