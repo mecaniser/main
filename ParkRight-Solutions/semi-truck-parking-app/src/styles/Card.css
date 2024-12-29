@@ -1,0 +1,11 @@
+.card {
+  background-color: #1a1a2e; /* White background for the card */
+  color: #efeff1; /* white text color for contrast */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for card effect */
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 20px; /* Add margin for spacing */
+}
