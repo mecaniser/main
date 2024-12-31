@@ -1,0 +1,46 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow box */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.register-button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #b8860b; /* Dark gold color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #a67c00; /* Slightly darker gold for hover effect */
+}
+
+a {
+  color: #b8860b; /* Dark gold color for links */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
