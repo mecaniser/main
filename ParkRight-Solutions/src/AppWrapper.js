@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard';
 // import BookingPage from './pages/BookingPage';
 
 const AppWrapper = () => {
@@ -18,7 +18,7 @@ const AppWrapper = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+        <Route path="/dashboard" element={<Dashboard />} />
         {/* <Route path="/booking" element={<BookingPage />} /> */}
       </Routes>
       <Footer />
