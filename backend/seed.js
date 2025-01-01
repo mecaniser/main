@@ -1,22 +1,27 @@
 const mongoose = require('mongoose');
-const ParkingSpace = require('./models/ParkingSpace');
 require('dotenv').config();
 
-const seedParkingSpaces = async () => {
-  await mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+const seedData = async () => {
+  try {
+    // Connect to MongoDB
+    await mongoose.connect(process.env.MONGO_URI);
 
-  const spaces = [
-    { location: 'Location 417', status: 'Available' },
-    { location: 'Location 418', status: 'Occupied' },
-    // Add more spaces as needed
-  ];
+    const ParkingSpace = require('./models/ParkingSpace');
 
-  await ParkingSpace.insertMany(spaces);
-  console.log('Database seeded!');
-  mongoose.disconnect();
+    const spaces = [
+      { location: 'Location 417', status: 'Available' },
+      { location: 'Location 418', status: 'Occupied' },
+      // Add more spaces as needed
+    ];
+
+    await ParkingSpace.insertMany(spaces);
+
+    console.log('Database seeded successfully');
+    process.exit(0);
+  } catch (err) {
+    console.error('Database seeding error:', err);
+    process.exit(1);
+  }
 };
 
-seedParkingSpaces();
+seedData();
