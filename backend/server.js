@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 const authRoutes = require('./routes/auth');
 const parkingSpacesRoutes = require('./routes/parkingSpaces');
 require('dotenv').config();
@@ -19,9 +20,17 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api', parkingSpacesRoutes);
 
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
 // Root route
 app.get('/', (req, res) => {
   res.send('Welcome to ParkRight Solutions API');
+});
+
+// Anything that doesn't match the above routes, send back the React index.html file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 // Connect to MongoDB
