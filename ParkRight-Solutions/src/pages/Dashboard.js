@@ -23,7 +23,7 @@ const Dashboard = () => {
       <h1>Your Parking Dashboard</h1>
       <div className="cards-container">
         {spaces.map((space) => (
-          <Card key={space.id}>
+          <Card key={space._id}>
             <h3>{space.location}</h3>
             <p>Status: {space.status}</p>
           </Card>
