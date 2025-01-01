@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '../components/Card';
-// import '../styles/Dashboard.css';
+import '../styles/Dashboard.css';
 
 const Dashboard = () => {
   const [spaces, setSpaces] = useState([]);
