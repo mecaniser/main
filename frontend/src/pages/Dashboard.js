@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '../components/Card';
-import MapComponent from '../components/MapComponent';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
@@ -22,6 +21,7 @@ const Dashboard = () => {
   }, []);
 
   return (
+  <>
     <div className="dashboard-container">
       <h1>Your Parking Dashboard</h1>
       {error ? (
@@ -36,8 +36,8 @@ const Dashboard = () => {
           ))}
         </div>
       )}
-      <MapComponent />
     </div>
+  </>
   );
 };
 
