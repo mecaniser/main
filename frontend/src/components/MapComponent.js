@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import React, { useState, useEffect, useRef } from 'react';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '100%',
@@ -9,6 +9,7 @@ const containerStyle = {
 const MapComponent = () => {
   const [center, setCenter] = useState(null);
   const [error, setError] = useState('');
+  const mapRef = useRef(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -29,6 +30,17 @@ const MapComponent = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (center && mapRef.current) {
+      const { AdvancedMarkerElement } = google.maps.marker;
+      const marker = new AdvancedMarkerElement({
+        position: center,
+        map: mapRef.current,
+        title: 'Your Location'
+      });
+    }
+  }, [center]);
+
   return (
     <div>
       {error && <p className="error-message">{error}</p>}
@@ -38,9 +50,8 @@ const MapComponent = () => {
             mapContainerStyle={containerStyle}
             center={center}
             zoom={10}
-          >
-            <Marker position={center} />
-          </GoogleMap>
+            onLoad={(map) => (mapRef.current = map)}
+          />
         </LoadScript>
       ) : (
         <p>Loading map...</p>
