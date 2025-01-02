@@ -25,6 +25,7 @@ html, body {
   margin-bottom: 20px;
   border-radius: 50%; /* Make the logo round */
 }
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -59,7 +60,7 @@ a:hover {
 /* Media queries for responsiveness */
 @media (max-width: 600px) {
   .home-container, .login-container, .register-container, .dashboard-container {
-    padding: 10px;
+    padding: 20px 10px 100px 10px;
     margin: 40px 0;
   }
 
