@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import '../styles/MapComponent.css'; // Import the CSS file
 
 const containerStyle = {
   width: '100%',
@@ -64,7 +65,7 @@ const MapComponent = () => {
           onLoad={(map) => (mapRef.current = map)}
         />
       ) : (
-        <p>Loading map...</p>
+        <p className="loading-message">Loading map...</p>
       )}
     </div>
   );
