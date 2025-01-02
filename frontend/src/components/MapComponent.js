@@ -6,6 +6,9 @@ const containerStyle = {
   height: '400px'
 };
 
+// Define the libraries array outside of the component
+const libraries = ['places'];
+
 const MapComponent = () => {
   const [center, setCenter] = useState(null);
   const [error, setError] = useState('');
@@ -13,7 +16,7 @@ const MapComponent = () => {
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries: ['places'] // Add any additional libraries you need
+    libraries // Use the libraries constant
   });
 
   useEffect(() => {
