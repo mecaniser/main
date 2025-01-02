@@ -10,8 +10,10 @@ const MapComponent = () => {
   const [center, setCenter] = useState(null);
   const [error, setError] = useState('');
   const mapRef = useRef(null);
+  const markerRef = useRef(null); // Ref to store the marker instance
+  // Define the libraries array outside of the component
 
-  const googleMapsApiKey = 'AIzaSyCLq8yyfcTujb6w5mBOpGEcWlKsk8c5qZg';
+  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey,
@@ -40,11 +42,15 @@ const MapComponent = () => {
   useEffect(() => {
     if (isLoaded && center && mapRef.current) {
       const { AdvancedMarkerElement } = window.google.maps.marker;
-      const marker = new AdvancedMarkerElement({
-        position: center,
-        map: mapRef.current,
-        title: 'Your Location'
-      });
+      if (markerRef.current) {
+        markerRef.current.setPosition(center);
+      } else {
+        markerRef.current = new AdvancedMarkerElement({
+          position: center,
+          map: mapRef.current,
+          title: 'Your Location'
+        });
+      }
     }
   }, [isLoaded, center]);
 
