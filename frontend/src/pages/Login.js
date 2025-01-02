@@ -7,16 +7,19 @@ import '../styles/Login.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Clear any previous error messages
     try {
       const response = await login({ email, password });
       localStorage.setItem('user', JSON.stringify(response.data));
       navigate('/dashboard');
     } catch (error) {
       console.error('Error logging in:', error);
+      setError('Invalid email or password. Please try again.');
     }
   };
 
@@ -37,8 +40,9 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className='login-button' type="submit">Login</button>
+          <button className="login-button" type="submit">Login</button>
         </form>
+        {error && <p className="error-message">{error}</p>}
         <p><a href="/register">Register</a></p>
       </Card>
     </div>
