@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '100%',
@@ -10,6 +10,11 @@ const MapComponent = () => {
   const [center, setCenter] = useState(null);
   const [error, setError] = useState('');
   const mapRef = useRef(null);
+
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries: ['places'] // Add any additional libraries you need
+  });
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -31,28 +36,30 @@ const MapComponent = () => {
   }, []);
 
   useEffect(() => {
-    if (center && mapRef.current) {
-      const { AdvancedMarkerElement } = google.maps.marker;
+    if (isLoaded && center && mapRef.current) {
+      const { AdvancedMarkerElement } = window.google.maps.marker;
       const marker = new AdvancedMarkerElement({
         position: center,
         map: mapRef.current,
         title: 'Your Location'
       });
     }
-  }, [center]);
+  }, [isLoaded, center]);
+
+  if (loadError) {
+    return <div>Error loading maps</div>;
+  }
 
   return (
     <div>
       {error && <p className="error-message">{error}</p>}
-      {center ? (
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={10}
-            onLoad={(map) => (mapRef.current = map)}
-          />
-        </LoadScript>
+      {isLoaded && center ? (
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={10}
+          onLoad={(map) => (mapRef.current = map)}
+        />
       ) : (
         <p>Loading map...</p>
       )}
