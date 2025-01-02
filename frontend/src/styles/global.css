@@ -8,12 +8,15 @@ html, body {
   color: white; /* White text for better contrast */
 }
 
-.home-container, .login-container, .register-container {
+.home-container, .register-container, .dashboard-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin: 20px 0;
   text-align: center;
 }
 
@@ -55,8 +58,9 @@ a:hover {
 
 /* Media queries for responsiveness */
 @media (max-width: 600px) {
-  .home-container, .login-container, .register-container {
+  .home-container, .login-container, .register-container, .dashboard-container {
     padding: 10px;
+    margin: 40px 0;
   }
 
   button {
