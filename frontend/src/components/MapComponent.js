@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import ErrorBoundary from '../components/ErrorBoundary';
 import '../styles/MapComponent.css'; // Import the CSS file
-
-const containerStyle = {
-  width: '100%',
-  height: '400px'
-};
 
 // Define the libraries array outside of the component
 const libraries = ['places'];
@@ -15,8 +11,10 @@ const MapComponent = () => {
   const [error, setError] = useState('');
   const mapRef = useRef(null);
 
+  const googleMapsApiKey = 'AIzaSyCLq8yyfcTujb6w5mBOpGEcWlKsk8c5qZg';
+
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey,
     libraries // Use the libraries constant
   });
 
@@ -55,19 +53,21 @@ const MapComponent = () => {
   }
 
   return (
-    <div>
+    <ErrorBoundary>
+    <>
       {error && <p className="error-message">{error}</p>}
       {isLoaded && center ? (
         <GoogleMap
-          mapContainerStyle={containerStyle}
+          mapContainerClassName="map-container-card"
           center={center}
-          zoom={10}
+          zoom={5}
           onLoad={(map) => (mapRef.current = map)}
         />
       ) : (
         <p className="loading-message">Loading map...</p>
       )}
-    </div>
+    </>
+    </ErrorBoundary>
   );
 };
 
