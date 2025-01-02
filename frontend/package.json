@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-no-sourcemaps": "GENERATE_SOURCEMAP=false react-scripts start"
+    "start-no-sourcemaps": "set GENERATE_SOURCEMAP=false && react-scripts start"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
