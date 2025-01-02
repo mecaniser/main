@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '../components/Card';
+import MapComponent from '../components/MapComponent';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
@@ -35,6 +36,7 @@ const Dashboard = () => {
           ))}
         </div>
       )}
+      <MapComponent />
     </div>
   );
 };
