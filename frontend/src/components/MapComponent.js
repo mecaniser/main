@@ -60,7 +60,7 @@ const MapComponent = () => {
         <GoogleMap
           mapContainerClassName="map-container-card"
           center={center}
-          zoom={5}
+          zoom={15}
           onLoad={(map) => (mapRef.current = map)}
         />
       ) : (
