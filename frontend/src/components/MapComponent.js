@@ -13,10 +13,9 @@ const MapComponent = () => {
   const markerRef = useRef(null); // Ref to store the marker instance
   // Define the libraries array outside of the component
 
-  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries // Use the libraries constant
   });
 
