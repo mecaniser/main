@@ -6,11 +6,10 @@
     "configurations": [
         {
             "type": "chrome",
-            "request":"launch",
+            "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "https://localhost.wellsfargo.com:23611",
-            "webRoot": "${workspaceFolder}",
-            "runtimeArgs": ["--disable-web-security"]
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }
