@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
+import MapComponent from '../components/MapComponent';
 import '../styles/global.css';
 
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
           <p><a className='register-link' href="/register">Register</a></p>
         </div>
       </Card>
+      <MapComponent />
     </div>
   );
 };
