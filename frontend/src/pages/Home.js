@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import MapComponent from '../components/MapComponent';
 import AddressCard from '../components/AddressCard';
+import BookingModal from '../components/BookingModal';
 import addressesData from '../config/addresses.json';
 import '../styles/global.css';
 
@@ -11,6 +12,8 @@ const Home = () => {
   const [showAddresses, setShowAddresses] = useState(false);
   const [mapCenter, setMapCenter] = useState(null);
   const [mapZoom, setMapZoom] = useState(10); // Default zoom level
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [showBookingModal, setShowBookingModal] = useState(false);
   const addressCardsRef = useRef(null);
 
   const handleLoginClick = () => {
@@ -43,8 +46,14 @@ const Home = () => {
   };
 
   const handleBookNowClick = (address) => {
-    alert(`Booking for address: ${address}`);
-    // Implement booking functionality here
+    setSelectedAddress(address);
+    setShowBookingModal(true);
+  };
+
+  const handleBookingSubmit = (bookingDetails) => {
+    alert(`Booking confirmed for ${bookingDetails.address} by ${bookingDetails.name} (${bookingDetails.email})`);
+    setShowBookingModal(false);
+    // Implement actual booking functionality here, such as sending the details to a backend service
   };
 
   const addresses = addressesData.addresses;
@@ -77,6 +86,13 @@ const Home = () => {
             />
           ))}
         </div>
+      )}
+      {showBookingModal && (
+        <BookingModal
+          address={selectedAddress}
+          onClose={() => setShowBookingModal(false)}
+          onSubmit={handleBookingSubmit}
+        />
       )}
     </div>
   );
