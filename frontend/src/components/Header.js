@@ -10,7 +10,7 @@ const Header = () => {
     <header className="header">
       <div className="logo-title">
         <div className="logo-header">
-          <img src="favicon-32x32.png" alt="Logo" />
+          <img src="rst-favicon-32x32.png" alt="Logo" />
         </div>
         <h1 className="title">Right Solution Truck Parking</h1>
       </div>
