@@ -12,6 +12,7 @@
   margin-top: 20px;
 }
 
+/* Base styles for the map container */
 .map-container-card {
   background-color: #1a1a2e; /* Dark background for the card */
   padding: 20px;
@@ -19,11 +20,18 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for card effect */
   width: 100%;
   height: 400px;
+  position: relative;
   box-sizing: border-box;
   margin: 20px 0; /* Add margin for spacing */
 }
 
-/* Media queries for larger screens */
+/* Media queries for smaller screens */
+@media (min-width: 414px) {
+  .map-container-card {
+    max-width: 400px; /* Increase max-width for larger screens */
+    padding: 30px; /* Increase padding for larger screens */
+  }
+}
 @media (min-width: 768px) {
   .map-container-card {
     max-width: 600px; /* Increase max-width for larger screens */
@@ -35,5 +43,35 @@
   .map-container-card {
     max-width: 800px; /* Increase max-width for even larger screens */
     padding: 40px; /* Increase padding for even larger screens */
+  }
+}
+
+/* Media queries for responsiveness */
+
+/* Small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .map-container-card {
+    height: 300px;
+  }
+}
+
+/* Medium devices (tablets, 600px to 768px) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .map-container-card {
+    height: 350px;
+  }
+}
+
+/* Large devices (desktops, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .map-container-card {
+    height: 400px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .map-container-card {
+    height: 500px;
   }
 }

@@ -11,6 +11,45 @@
   color: #b8860b; /* Dark gold color */
 }
 
+.add-address-form {
+  margin-bottom: 20px;
+}
+
+.add-address-form input {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-address-form button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #b8860b;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-address-form button:hover {
+  background-color: #8a6406;
+}
+#addAddress {
+  padding: 10px 20px;
+  border: none;
+  background-color: #b8860b;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  width: 70vw;
+  max-width: 270px
+}
+
+#addAddress:hover {
+  background-color: #8a6406;
+}
+
 .cards-container {
   display: flex;
   flex-wrap: wrap;
@@ -20,9 +59,22 @@
   max-width: 1200px;
 }
 
-
 .error-message {
   color: red;
   font-size: 18px;
   margin-top: 20px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c82333;
 }

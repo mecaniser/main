@@ -20,12 +20,6 @@ html, body {
   text-align: center;
 }
 
-.logo-homePage {
-  width: 150px; /* Adjust the size as needed */
-  margin-bottom: 20px;
-  border-radius: 50%; /* Make the logo round */
-}
-
 .button-container {
   display: flex;
   justify-content: center;
