@@ -75,8 +75,8 @@ const MapComponent = ({ addresses }) => {
   }
 
   const customIcon = {
-    url: `${process.env.PUBLIC_URL}/logo1.png`, // URL to the custom marker icon in the public folder
-    scaledSize: isLoaded && new window.google.maps.Size(40, 40),
+    url: `${process.env.PUBLIC_URL}/rst-favicon-32x32.png`, // URL to the custom marker icon in the public folder
+    scaledSize: isLoaded && new window.google.maps.Size(32, 32),
   };
 
   return (
