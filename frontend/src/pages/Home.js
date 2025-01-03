@@ -42,6 +42,11 @@ const Home = () => {
     }
   };
 
+  const handleBookNowClick = (address) => {
+    alert(`Booking for address: ${address}`);
+    // Implement booking functionality here
+  };
+
   const addresses = addressesData.addresses;
 
   return (
@@ -64,7 +69,12 @@ const Home = () => {
       {showAddresses && (
         <div className="address-cards-container" ref={addressCardsRef}>
           {addresses.map((address, index) => (
-            <AddressCard key={index} address={address} onClick={handleAddressClick} />
+            <AddressCard
+              key={index}
+              address={address}
+              onClick={handleAddressClick}
+              onBook={handleBookNowClick}
+            />
           ))}
         </div>
       )}

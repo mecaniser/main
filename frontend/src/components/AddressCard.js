@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/AddressCard.css';
 
-const AddressCard = ({ address, onClick }) => {
+const AddressCard = ({ address, onClick, onBook }) => {
   let street = '';
   let city = '';
   let state = '';
@@ -28,6 +28,7 @@ const AddressCard = ({ address, onClick }) => {
     <div className="address-card" onClick={() => onClick(address)}>
       <h3>{street}</h3>
       <p>{city}, {state} {zipCode}</p>
+      <button className="book-now-button" onClick={(e) => { e.stopPropagation(); onBook(address); }}>Book Now</button>
     </div>
   );
 };
