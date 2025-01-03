@@ -5,12 +5,14 @@ import MapComponent from '../components/MapComponent';
 import AddressCard from '../components/AddressCard';
 import BookingModal from '../components/BookingModal';
 import PricingCard from '../components/PricingCard';
+import ServicesCard from '../components/ServicesCard';
 import addressesData from '../config/addresses.json';
 import '../styles/global.css';
 
 const Home = () => {
   const navigate = useNavigate();
   const [showAddresses, setShowAddresses] = useState(false);
+  const [showServices, setShowServices] = useState(false); // State for showing services
   const [mapCenter, setMapCenter] = useState(null);
   const [mapZoom, setMapZoom] = useState(10); // Default zoom level
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -47,6 +49,10 @@ const Home = () => {
     }
   };
 
+  const handleShowServicesClick = () => {
+    setShowServices(!showServices);
+  };
+
   const handleBookNowClick = (address) => {
     setSelectedAddress(address);
     setShowBookingModal(true);
@@ -67,6 +73,12 @@ const Home = () => {
 
   return (
     <div className="home-container">
+      <div className="button-container">
+        <button onClick={handleShowServicesClick}>
+          {showServices ? 'Hide Services' : 'Show Services'}
+        </button>
+      </div>
+      {showServices && <ServicesCard />} {/* Conditionally render ServicesCard */}
       <Card>
         <img src="/rst-logo.png" alt="Logo" className="logo" />
         <h1>Right Solution Truck Parking</h1>
