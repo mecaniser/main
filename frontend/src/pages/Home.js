@@ -9,9 +9,27 @@ import '../styles/global.css';
 const Home = () => {
   const navigate = useNavigate();
   const [showAddresses, setShowAddresses] = useState(false);
+  const [mapCenter, setMapCenter] = useState(null);
+  const [mapZoom, setMapZoom] = useState(10); // Default zoom level
 
   const handleLoginClick = () => {
     navigate('/login');
+  };
+
+  const handleAddressClick = async (address) => {
+    const geocoder = new window.google.maps.Geocoder();
+    geocoder.geocode({ address }, (results, status) => {
+      if (status === 'OK') {
+        const location = results[0].geometry.location;
+        setMapCenter({
+          lat: location.lat(),
+          lng: location.lng()
+        });
+        setMapZoom(15); // Set zoom level when an address is clicked
+      } else {
+        console.error('Geocode was not successful for the following reason: ' + status);
+      }
+    });
   };
 
   const addresses = addressesData.addresses;
@@ -27,7 +45,7 @@ const Home = () => {
           <p><a className='register-link' href="/register">Register</a></p>
         </div>
       </Card>
-      <MapComponent addresses={addresses} />
+      <MapComponent addresses={addresses} center={mapCenter} zoom={mapZoom} />
       <div className="button-container">
         <button onClick={() => setShowAddresses(!showAddresses)}>
           {showAddresses ? 'Hide Locations' : 'Show Locations'}
@@ -36,7 +54,7 @@ const Home = () => {
       {showAddresses && (
         <div className="address-cards-container">
           {addresses.map((address, index) => (
-            <AddressCard key={index} address={address} />
+            <AddressCard key={index} address={address} onClick={handleAddressClick} />
           ))}
         </div>
       )}
