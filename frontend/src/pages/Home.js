@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import MapComponent from '../components/MapComponent';
 import AddressCard from '../components/AddressCard';
 import BookingModal from '../components/BookingModal';
+import PricingCard from '../components/PricingCard';
 import addressesData from '../config/addresses.json';
 import '../styles/global.css';
 
@@ -14,6 +15,7 @@ const Home = () => {
   const [mapZoom, setMapZoom] = useState(10); // Default zoom level
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState(null);
   const addressCardsRef = useRef(null);
 
   const handleLoginClick = () => {
@@ -50,8 +52,13 @@ const Home = () => {
     setShowBookingModal(true);
   };
 
+  const handlePricingCardBookNowClick = (title, price, duration) => {
+    setBookingDetails({ title, price, duration });
+    setShowBookingModal(true);
+  };
+
   const handleBookingSubmit = (bookingDetails) => {
-    alert(`Booking confirmed for ${bookingDetails.address} by ${bookingDetails.name} (${bookingDetails.email})`);
+    alert(`Booking confirmed for ${bookingDetails.address || bookingDetails.title} by ${bookingDetails.name} (${bookingDetails.email})`);
     setShowBookingModal(false);
     // Implement actual booking functionality here, such as sending the details to a backend service
   };
@@ -69,6 +76,11 @@ const Home = () => {
           <p><a className='register-link' href="/register">Register</a></p>
         </div>
       </Card>
+      <div className="pricing-cards-container">
+        <PricingCard title="Daily" price="30" duration="per day" onBook={handlePricingCardBookNowClick} />
+        <PricingCard title="Weekly" price="180" duration="per week" onBook={handlePricingCardBookNowClick} />
+        <PricingCard title="Monthly" price="260" duration="per month" onBook={handlePricingCardBookNowClick} />
+      </div>
       <MapComponent addresses={addresses} center={mapCenter} zoom={mapZoom} />
       <div className="button-container">
         <button onClick={handleShowAddressesClick}>
@@ -90,6 +102,7 @@ const Home = () => {
       {showBookingModal && (
         <BookingModal
           address={selectedAddress}
+          bookingDetails={bookingDetails}
           onClose={() => setShowBookingModal(false)}
           onSubmit={handleBookingSubmit}
         />
