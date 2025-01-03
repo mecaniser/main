@@ -7,7 +7,13 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex: 1 1 calc(33.333% - 20px); /* Flex property to take up space evenly */
   box-sizing: border-box;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
 }
+.address-card:hover {
+  background-color: #2a2a3e; /* Slightly lighter background color on hover */
+  transform: scale(1.05); /* Slightly enlarge the card on hover */
+}
+
 
 .address-card h3 {
   /* margin: 0 0 10px 0; */

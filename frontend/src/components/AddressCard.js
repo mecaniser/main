@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/AddressCard.css';
 
-const AddressCard = ({ address }) => {
+const AddressCard = ({ address, onClick }) => {
   let street = '';
   let city = '';
   let state = '';
@@ -25,7 +25,7 @@ const AddressCard = ({ address }) => {
   }
 
   return (
-    <div className="address-card">
+    <div className="address-card" onClick={() => onClick(address)}>
       <h3>{street}</h3>
       <p>{city}, {state} {zipCode}</p>
     </div>
