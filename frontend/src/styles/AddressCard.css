@@ -1,10 +1,12 @@
 .address-card {
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 10px;
+  padding: 5px;
   margin: 10px 0;
   background-color: #1a1a2e; /* Dark background for the card */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(33.333% - 20px); /* Flex property to take up space evenly */
+  box-sizing: border-box;
 }
 
 .address-card h3 {
@@ -20,43 +22,58 @@
 .address-cards-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 20px;
   max-width: 800px;
   width: 100%;
-  position: relative;
 }
 
 /* Media queries for responsiveness */
 
 /* Small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .address-card {
+  .address-cards-container {
     max-width: 100%;
     margin: 5px;
+  }
+  .address-card {
+    flex: 1 1 50%; /* Full width for small devices */
+    margin: 5px 0;
   }
 }
 
 /* Medium devices (tablets, 600px to 768px) */
 @media only screen and (min-width: 600px) and (max-width: 768px) {
+ .address-cards-container {
+    max-width: 60%;
+    margin: 10px;
+  }
   .address-card {
-    max-width: 45%;
+    flex: 1 1 calc(50% - 20px); /* Half width for medium devices */
     margin: 10px;
   }
 }
 
 /* Large devices (desktops, 768px and up) */
 @media only screen and (min-width: 768px) {
+ .address-cards-container {
+    max-width: 75%;
+    margin: 10px;
+  }
   .address-card {
-    max-width: 30%;
+    flex: 1 1 calc(33.333% - 20px); /* One-fourth width for extra large devices */
     margin: 10px;
   }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+ .address-cards-container {
+    max-width: 45%;
+    margin: 10px;
+  }
   .address-card {
-    max-width: 25%;
+    flex: 1 1 calc(33.333% - 20px); /* One-fourth width for extra large devices */
     margin: 10px;
   }
 }
