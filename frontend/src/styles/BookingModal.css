@@ -71,3 +71,18 @@
 .booking-modal-content form button:hover {
   background-color: #0056b3;
 }
+
+/* Media queries for responsiveness */
+
+/* Small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .close-button {
+      position: relative;
+      top: -15px;
+      right: -135px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+  }
+}
