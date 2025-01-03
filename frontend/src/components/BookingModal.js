@@ -13,25 +13,25 @@ const BookingModal = ({ address, onClose, onSubmit }) => {
   return (
     <div className="booking-modal">
       <div className="booking-modal-content">
-        <span className="close" onClick={onClose}>&times;</span>
+        <button className="close-button" onClick={onClose}>X</button>
         <h2>Book Now</h2>
         <p>Address: {address}</p>
         <form onSubmit={handleSubmit}>
           <label>
-            Name:
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              placeholder="Name"
               required
             />
           </label>
           <label>
-            Email:
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
               required
             />
           </label>
