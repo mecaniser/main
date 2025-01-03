@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import MapComponent from '../components/MapComponent';
@@ -11,6 +11,7 @@ const Home = () => {
   const [showAddresses, setShowAddresses] = useState(false);
   const [mapCenter, setMapCenter] = useState(null);
   const [mapZoom, setMapZoom] = useState(10); // Default zoom level
+  const addressCardsRef = useRef(null);
 
   const handleLoginClick = () => {
     navigate('/login');
@@ -32,6 +33,15 @@ const Home = () => {
     });
   };
 
+  const handleShowAddressesClick = () => {
+    setShowAddresses(!showAddresses);
+    if (!showAddresses) {
+      setTimeout(() => {
+        addressCardsRef.current.scrollIntoView({ behavior: 'smooth' });
+      }, 100); // Delay to ensure the address cards are rendered
+    }
+  };
+
   const addresses = addressesData.addresses;
 
   return (
@@ -47,12 +57,12 @@ const Home = () => {
       </Card>
       <MapComponent addresses={addresses} center={mapCenter} zoom={mapZoom} />
       <div className="button-container">
-        <button onClick={() => setShowAddresses(!showAddresses)}>
+        <button onClick={handleShowAddressesClick}>
           {showAddresses ? 'Hide Locations' : 'Show Locations'}
         </button>
       </div>
       {showAddresses && (
-        <div className="address-cards-container">
+        <div className="address-cards-container" ref={addressCardsRef}>
           {addresses.map((address, index) => (
             <AddressCard key={index} address={address} onClick={handleAddressClick} />
           ))}
