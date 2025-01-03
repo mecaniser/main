@@ -1,40 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import React, { useEffect, useState, useRef } from 'react';
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import ErrorBoundary from './ErrorBoundary';
 import '../styles/MapComponent.css'; // Import the CSS file
 
-// Define the libraries array outside of the component
-const libraries = ['places'];
-
-const MapComponent = ({ addresses }) => {
-  const [center, setCenter] = useState(null);
-  const [markers, setMarkers] = useState([]);
-  const [error, setError] = useState('');
-  const mapRef = useRef(null);
-
-  const { isLoaded, loadError } = useJsApiLoader({
+const MapComponent = ({ addresses, center, zoom }) => {
+  const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries // Use the libraries constant
   });
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCenter({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          });
-        },
-        (error) => {
-          console.error('Error fetching location:', error);
-          setError('Failed to fetch your location. Please allow location access.');
-        }
-      );
-    } else {
-      setError('Geolocation is not supported by this browser.');
-    }
-  }, []);
+  const [markers, setMarkers] = useState([]);
+  const [mapCenter, setMapCenter] = useState(center);
+  const [mapZoom, setMapZoom] = useState(zoom);
+  const [error, setError] = useState(null);
+  const mapRef = useRef();
 
   useEffect(() => {
     const geocodeAddresses = async () => {
@@ -59,7 +37,7 @@ const MapComponent = ({ addresses }) => {
         try {
           const markerLocations = await Promise.all(markerPromises);
           setMarkers(markerLocations);
-          setCenter(markerLocations[0]); // Center the map on the first address
+          setMapCenter(markerLocations[0]); // Center the map on the first address
         } catch (error) {
           console.error(error);
           setError('Failed to geocode one or more addresses.');
@@ -69,6 +47,18 @@ const MapComponent = ({ addresses }) => {
 
     geocodeAddresses();
   }, [isLoaded, addresses]);
+
+  useEffect(() => {
+    if (center) {
+      setMapCenter(center);
+    }
+  }, [center]);
+
+  useEffect(() => {
+    if (zoom) {
+      setMapZoom(zoom);
+    }
+  }, [zoom]);
 
   if (loadError) {
     return <div>Error loading maps</div>;
@@ -83,15 +73,19 @@ const MapComponent = ({ addresses }) => {
     <ErrorBoundary>
       <>
         {error && <p className="error-message">{error}</p>}
-        {isLoaded && center ? (
+        {isLoaded && mapCenter ? (
           <GoogleMap
             mapContainerClassName="map-container-card"
-            center={center}
-            zoom={10}
+            center={mapCenter}
+            zoom={mapZoom}
             onLoad={(map) => (mapRef.current = map)}
           >
             {markers.map((marker, index) => (
-              <Marker key={index} position={marker} title={`Location ${index + 1}`} icon={customIcon} />
+              <Marker
+                key={index}
+                position={marker}
+                icon={customIcon}
+              />
             ))}
           </GoogleMap>
         ) : (
