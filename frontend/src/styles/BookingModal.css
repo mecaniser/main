@@ -8,7 +8,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(10px);
   z-index: 1000;
 }
 
@@ -53,55 +54,118 @@
 .booking-modal-content form .form-group {
   display: flex;
   flex-direction: column;
-  flex: 1 1 calc(50% - 10px); /* Flex property to take up space evenly */
-  margin-bottom: 10px;
-  background-color: #2a2a3e;
-  padding: 10px;
-  border-radius: 4px;
-  box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 .booking-modal-content form .form-group label {
+  display: block;
   margin-bottom: 5px;
   color: white;
+}
+
+#termsAgreedLabel {
+  display: inline;
+  margin: 5px 0;
+  color: white;
+}
+
+#termsAgreedLabel input {
+  margin-right: 5px;
+}
+
+#termsAgreedLabel a {
+  color: #007bff;
+}
+
+.booking-modal-content form .form-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+.booking-modal-content form .form-group input[type="radio"] {
+  margin-right: 5px;
 }
 
 .booking-modal-content form .form-group input,
 .booking-modal-content form .form-group select {
-  padding: 6px;
-  margin-top: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  max-width: 100%;
-  font-size: 0.9em;
+  box-sizing: border-box;
 }
 
-.booking-modal-content form .form-group .checkbox-group {
+.booking-modal-content form .form-group input:focus,
+.booking-modal-content form .form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-navigation {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  column-gap: 12px;
 }
 
-.booking-modal-content form .form-group .checkbox-group label {
-  margin-bottom: 5px;
-}
-
-.booking-modal-content form button {
-  padding: 8px;
+.form-navigation button {
+  padding: 10px 20px;
+  font-size: 16px;
   border: none;
-  background-color: #007bff;
-  color: white;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.9em;
+  background-color: #007bff;
+  color: #fff;
 }
 
-.booking-modal-content form button:disabled {
-  background-color: #cccccc;
+#submit-button:disabled {
+  background-color: #ccc;
   cursor: not-allowed;
 }
 
-.booking-modal-content form button:hover:enabled {
-  background-color: #0056b3;
+#submit-button {
+  background-color: #b8860b; /* Dark gold color */
+  color: white;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar .progress {
+  height: 10px;
+  background-color: #007bff;
+  width: 0;
+  transition: width 0.3s;
+}
+
+.language-selector-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.language-selector {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.language-selector:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.language-selector option {
+  padding: 10px;
 }
 
 /* Media queries for responsiveness */
