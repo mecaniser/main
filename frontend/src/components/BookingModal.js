@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FormattedMessage, useIntl, IntlProvider } from 'react-intl';
+import axios from 'axios';
 import '../styles/BookingModal.css';
 import messages_en from '../locales/en.json';
 import messages_ru from '../locales/ru.json';
@@ -17,6 +18,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
   const { formatMessage } = useIntl();
   const language = navigator.language.split(/[-_]/)[0] || 'en'; // Get the language code or default to 'en'
   const [locale, setLocale] = useState(language);
+  const [locations, setLocations] = useState([]); // State to store available locations
 
   const handleLanguageChange = (e) => {
     setLocale(e.target.value);
@@ -58,6 +60,20 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
       }));
     }
   }, [bookingDetails]);
+
+  useEffect(() => {
+    // Fetch available locations when the component mounts
+    const fetchLocations = async () => {
+      try {
+        const response = await axios.get('/api/parking-spaces');
+        setLocations(response.data);
+      } catch (error) {
+        console.error('Error fetching locations:', error);
+      }
+    };
+
+    fetchLocations();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -280,6 +296,23 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     }
                     readOnly
                   />
+                </label>
+                <label>
+                  <FormattedMessage id="parkingLocation" defaultMessage="Parking Location" />
+                  <select
+                    name="parkingLocation"
+                    value={formData.parkingLocation}
+                    onChange={handleChange}
+                    className={errors.parkingLocation ? 'error' : ''}
+                    required
+                  >
+                    <option value="">{formatMessage({ id: 'selectLocation', defaultMessage: 'Select Location' })}</option>
+                    {locations.map((location) => (
+                      <option key={location._id} value={location.address}>
+                        {location.address}
+                      </option>
+                    ))}
+                  </select>
                 </label>
                 <label>
                   <FormattedMessage id="startDate" defaultMessage="Start Date" />

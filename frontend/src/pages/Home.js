@@ -64,7 +64,7 @@ const Home = () => {
   };
 
   const handleBookingSubmit = (bookingDetails) => {
-    alert(`Booking confirmed for ${bookingDetails.address || bookingDetails.title} by ${bookingDetails.name} (${bookingDetails.email})`);
+    alert(`Booking confirmed for ${bookingDetails.parkingLocation  || bookingDetails.title} by ${bookingDetails.name} (${bookingDetails.email})`);
     setShowBookingModal(false);
     // Implement actual booking functionality here, such as sending the details to a backend service
   };
