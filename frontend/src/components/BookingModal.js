@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
 import '../styles/BookingModal.css';
 
 const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
@@ -76,10 +77,10 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
     <div className="booking-modal">
       <div className="booking-modal-content">
         <button className="close-button" onClick={onClose}>X</button>
-        <h2>Truck Parking Booking Form</h2>
+        <h2><FormattedMessage id="title" defaultMessage="Truck Parking Booking Form" /></h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <h3>1. Driver Information</h3>
+            <h3><FormattedMessage id="driverInformation" defaultMessage="1. Driver Information" /></h3>
             <input
               type="text"
               name="name"
@@ -114,7 +115,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
           </div>
 
           <div className="form-group">
-            <h3>2. Truck/Vehicle Information</h3>
+            <h3><FormattedMessage id="truckVehicleInformation" defaultMessage="2. Truck/Vehicle Information" /></h3>
             <input
               type="text"
               name="truckDetails"
@@ -146,7 +147,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                 onChange={handleChange}
                 required
               >
-                <option value="">Trailer Type and Size</option>
+                <option value=""><FormattedMessage id="trailerType" defaultMessage="Trailer Type and Size" /></option>
                 <option value="Flatbed">Flatbed</option>
                 <option value="Reefer">Reefer</option>
                 <option value="Dry Van">Dry Van</option>
@@ -155,8 +156,9 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
               </select>
             )}
           </div>
+
           <div className="form-group">
-            <h3>3. Parking Requirements</h3>
+            <h3><FormattedMessage id="parkingRequirements" defaultMessage="3. Parking Requirements" /></h3>
             <input
               type="text"
               name="parkingDuration"
@@ -191,7 +193,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
             )}
             {formData.parkingDuration === 'per day' && !extendDuration && (
               <button type="button" onClick={handleExtendDuration}>
-                Extend Duration
+                <FormattedMessage id="extendDuration" defaultMessage="Extend Duration" />
               </button>
             )}
             {extendDuration && (
@@ -207,7 +209,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
           </div>
 
           <div className="form-group">
-            <h3>4. Payment Information</h3>
+            <h3><FormattedMessage id="paymentInformation" defaultMessage="4. Payment Information" /></h3>
             <input
               type="text"
               name="billingAddress"
@@ -222,7 +224,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
               onChange={handleChange}
               required
             >
-              <option value="">Payment Method</option>
+              <option value=""><FormattedMessage id="paymentMethod" defaultMessage="Payment Method" /></option>
               <option value="Credit/Debit Card">Credit/Debit Card</option>
               <option value="ACH/Bank Transfer">ACH/Bank Transfer</option>
               <option value="Other">Other</option>
@@ -233,14 +235,14 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
               onChange={handleChange}
               required
             >
-              <option value="">Would you like an invoice or receipt?</option>
+              <option value=""><FormattedMessage id="invoicePreference" defaultMessage="Would you like an invoice or receipt?" /></option>
               <option value="Email">Email</option>
               <option value="Physical Copy">Physical Copy</option>
             </select>
           </div>
 
           <div className="form-group">
-            <h3>5. Optional Information</h3>
+            <h3><FormattedMessage id="optionalInformation" defaultMessage="5. Optional Information" /></h3>
             <input
               type="text"
               name="companyName"
@@ -265,7 +267,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
           </div>
 
           <div className="form-group">
-            <h3>6. Terms and Agreement</h3>
+            <h3><FormattedMessage id="termsAndAgreement" defaultMessage="6. Terms and Agreement" /></h3>
             <label>
               <input
                 type="checkbox"
@@ -274,7 +276,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                 onChange={handleChange}
                 required
               />
-              I have read and agree to the <a href="/terms" target="_blank">Parking Terms and Conditions</a>.
+              <FormattedMessage id="termsAgreed" defaultMessage="I have read and agree to the Parking Terms and Conditions." />
             </label>
             <label>
               <input
@@ -284,11 +286,11 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                 onChange={handleChange}
                 required
               />
-              I agree to the Payment Terms.
+              <FormattedMessage id="paymentTermsAgreed" defaultMessage="I agree to the Payment Terms." />
             </label>
           </div>
 
-          <button type="submit" disabled={isSubmitDisabled}>Submit</button>
+          <button type="submit" disabled={isSubmitDisabled}><FormattedMessage id="submit" defaultMessage="Submit" /></button>
         </form>
       </div>
     </div>
