@@ -102,6 +102,13 @@
   border-color: #007bff;
 }
 
+.booking-modal-content form .form-group input.error,
+.booking-modal-content form .form-group select.error {
+  border-color: #ff4d4f; /* Red color for error outline */
+  box-shadow: 0 0 5px rgba(255, 77, 79, 0.5); /* Red shadow for error */
+  background-color: #ffe6e6; /* Light red background for error */
+}
+
 .form-navigation {
   display: flex;
   justify-content: center;
@@ -166,6 +173,13 @@
 
 .language-selector option {
   padding: 10px;
+}
+
+.error {
+  color: #ff4d4f; /* Red color for error messages */
+  font-size: 0.875em;
+  margin-top: 5px;
+  text-align: left; /* Align error message to the left */
 }
 
 /* Media queries for responsiveness */

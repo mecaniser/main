@@ -48,6 +48,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
 
   const [extendDuration, setExtendDuration] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (bookingDetails) {
@@ -80,11 +81,17 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
         [name]: value,
       }));
     }
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: '',
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ address, ...formData });
+    if (validateStep(currentStep)) {
+      onSubmit({ address, ...formData });
+    }
   };
 
   const handleExtendDuration = () => {
@@ -94,11 +101,43 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
   const isSubmitDisabled = !formData.termsAgreed;
 
   const nextStep = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
+    if (validateStep(currentStep)) {
+      setCurrentStep((prevStep) => prevStep + 1);
+    }
   };
 
   const prevStep = () => {
     setCurrentStep((prevStep) => prevStep - 1);
+  };
+
+  const validateStep = (step) => {
+    let newErrors = {};
+    switch (step) {
+      case 1:
+        if (!formData.name) newErrors.name = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        if (!formData.phone) newErrors.phone = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        if (!formData.email) newErrors.email = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        break;
+      case 2:
+        if (!formData.truckDetails) newErrors.truckDetails = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        if (!formData.truckLicensePlate) newErrors.truckLicensePlate = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        if (!formData.trailerLicensePlate) newErrors.trailerLicensePlate = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        break;
+      case 3:
+        if (!formData.parkingDuration) newErrors.parkingDuration = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        if (!formData.startDate) newErrors.startDate = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        break;
+      case 4:
+        break; // Optional information, no validation needed
+      case 5:
+        if (!formData.billingAddress) newErrors.billingAddress = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        if (!formData.paymentMethod) newErrors.paymentMethod = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        break;
+      default:
+        break;
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const progressPercentage = (currentStep / 5) * 100;
@@ -131,6 +170,8 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
+                    placeholder={errors.name || ''}
+                    className={errors.name ? 'error' : ''}
                     required
                   />
                 </label>
@@ -141,6 +182,8 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    placeholder={errors.phone || ''}
+                    className={errors.phone ? 'error' : ''}
                     required
                   />
                 </label>
@@ -151,6 +194,8 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    placeholder={errors.email || ''}
+                    className={errors.email ? 'error' : ''}
                     required
                   />
                 </label>
@@ -166,6 +211,8 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="truckDetails"
                     value={formData.truckDetails}
                     onChange={handleChange}
+                    placeholder={errors.truckDetails || ''}
+                    className={errors.truckDetails ? 'error' : ''}
                     required
                   />
                 </label>
@@ -176,6 +223,8 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="truckLicensePlate"
                     value={formData.truckLicensePlate}
                     onChange={handleChange}
+                    placeholder={errors.truckLicensePlate || ''}
+                    className={errors.truckLicensePlate ? 'error' : ''}
                     required
                   />
                 </label>
@@ -186,6 +235,8 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="trailerLicensePlate"
                     value={formData.trailerLicensePlate}
                     onChange={handleChange}
+                    placeholder={errors.trailerLicensePlate || ''}
+                    className={errors.trailerLicensePlate ? 'error' : ''}
                     required
                   />
                 </label>
@@ -196,6 +247,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                       name="trailerType"
                       value={formData.trailerType}
                       onChange={handleChange}
+                      className={errors.trailerType ? 'error' : ''}
                       required
                     >
                       <option value="">{formatMessage({ id: 'trailerType', defaultMessage: 'Trailer Type and Size' })}</option>
@@ -236,6 +288,8 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="startDate"
                     value={formData.startDate}
                     onChange={handleChange}
+                    placeholder={errors.startDate || ''}
+                    className={errors.startDate ? 'error' : ''}
                     required
                   />
                 </label>
@@ -310,6 +364,8 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="billingAddress"
                     value={formData.billingAddress}
                     onChange={handleChange}
+                    placeholder={errors.billingAddress || ''}
+                    className={errors.billingAddress ? 'error' : ''}
                     required
                   />
                 </label>
@@ -319,6 +375,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="paymentMethod"
                     value={formData.paymentMethod}
                     onChange={handleChange}
+                    className={errors.paymentMethod ? 'error' : ''}
                     required
                   >
                     <option value="">{formatMessage({ id: 'paymentMethod', defaultMessage: 'Payment Method' })}</option>
@@ -327,19 +384,6 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     <option value="Other">Other</option>
                   </select>
                 </label>
-                {/* <label>
-                  <FormattedMessage id="invoicePreference" defaultMessage="Would you like an invoice or receipt?" />
-                  <select
-                    name="invoicePreference"
-                    value={formData.invoicePreference}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">{formatMessage({ id: 'invoicePreference', defaultMessage: 'Would you like an invoice or receipt?' })}</option>
-                    <option value="Email">Email</option>
-                    <option value="Physical Copy">Physical Copy</option>
-                  </select>
-                </label> */}
                 <label id="termsAgreedLabel" className="checkbox-label">
                   <div className="terms-container"></div>
                   <input
@@ -361,16 +405,6 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     }}
                   />
                 </label>
-                {/* <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    name="paymentTermsAgreed"
-                    checked={formData.paymentTermsAgreed}
-                    onChange={handleChange}
-                    required
-                  />
-                  <FormattedMessage id="paymentTermsAgreed" defaultMessage="I agree to the Payment Terms." />
-                </label> */}
               </div>
             )}
             <div className="form-navigation">
@@ -391,6 +425,9 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
               )}
             </div>
           </form>
+          {formData.specificNeeds.map((need, index) => (
+            <div key={index}>{need}</div>
+          ))}
         </div>
       </div>
     </IntlProvider>
