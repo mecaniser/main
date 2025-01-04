@@ -155,7 +155,6 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
               </select>
             )}
           </div>
-
           <div className="form-group">
             <h3>3. Parking Requirements</h3>
             <input
