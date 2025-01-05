@@ -10,7 +10,7 @@ const BookingConfirmation = ({ bookingDetails }) => {
         <p><strong>Parking Location:</strong> {bookingDetails.parkingLocation || bookingDetails.title}</p>
         <p><strong>Email:</strong> {bookingDetails.email}</p>
         <p><strong>Price:</strong> {bookingDetails.price}</p>
-        <p><strong>Duration:</strong> {bookingDetails.startDate }</p>
+        <p><strong>Duration:</strong> {bookingDetails.startDate}</p>
       </div>
     </Card>
   );
