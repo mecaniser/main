@@ -6,6 +6,7 @@ import AddressCard from '../components/AddressCard';
 import BookingModal from '../components/BookingModal';
 import PricingCard from '../components/PricingCard';
 import ServicesCard from '../components/ServicesCard';
+import BookingConfirmation from '../components/BookingConfirmation';
 import addressesData from '../config/addresses.json';
 import '../styles/global.css';
 
@@ -18,6 +19,7 @@ const Home = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [bookingDetails, setBookingDetails] = useState(null);
+  const [bookingSubmitted, setBookingSubmitted] = useState(false);
   const addressCardsRef = useRef(null);
 
   const handleLoginClick = () => {
@@ -63,9 +65,10 @@ const Home = () => {
     setShowBookingModal(true);
   };
 
-  const handleBookingSubmit = (bookingDetails) => {
-    alert(`Booking confirmed for ${bookingDetails.parkingLocation  || bookingDetails.title} by ${bookingDetails.name} (${bookingDetails.email})`);
+  const handleBookingSubmit = (details) => {
+    setBookingDetails(details);
     setShowBookingModal(false);
+    setBookingSubmitted(true);
     // Implement actual booking functionality here, such as sending the details to a backend service
   };
 
@@ -73,51 +76,57 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <div className="button-container">
-        <button onClick={handleShowServicesClick}>
-          {showServices ? 'Hide Services' : 'Show Services'}
-        </button>
-      </div>
-      {showServices && <ServicesCard />} {/* Conditionally render ServicesCard */}
-      <Card>
-        <img src="/rst-logo.png" alt="Logo" className="logo" />
-        <h1>Right Solution Truck Parking</h1>
-        <p>Find and book parking spaces for your semi trucks.</p>
-        <div className="button-container">
-          <button onClick={handleLoginClick}>Login</button>
-          <p><a className='register-link' href="/register">Register</a></p>
-        </div>
-      </Card>
-      <div className="pricing-cards-container">
-        <PricingCard title="Daily" price="30" duration="per day" onBook={handlePricingCardBookNowClick} />
-        <PricingCard title="Weekly" price="180" duration="per week" onBook={handlePricingCardBookNowClick} />
-        <PricingCard title="Monthly" price="260" duration="per month" onBook={handlePricingCardBookNowClick} />
-      </div>
-      <MapComponent addresses={addresses} center={mapCenter} zoom={mapZoom} />
-      <div className="button-container">
-        <button onClick={handleShowAddressesClick}>
-          {showAddresses ? 'Hide Locations' : 'Show Locations'}
-        </button>
-      </div>
-      {showAddresses && (
-        <div className="address-cards-container" ref={addressCardsRef}>
-          {addresses.map((address, index) => (
-            <AddressCard
-              key={index}
-              address={address}
-              onClick={handleAddressClick}
-              onBook={handleBookNowClick}
+      {bookingSubmitted ? (
+        <BookingConfirmation bookingDetails={bookingDetails} />
+      ) : (
+        <>
+          <div className="button-container">
+            <button onClick={handleShowServicesClick}>
+              {showServices ? 'Hide Services' : 'Show Services'}
+            </button>
+          </div>
+          {showServices && <ServicesCard />} {/* Conditionally render ServicesCard */}
+          <Card>
+            <img src="/rst-logo.png" alt="Logo" className="logo" />
+            <h1>Right Solution Truck Parking</h1>
+            <p>Find and book parking spaces for your semi trucks.</p>
+            <div className="button-container">
+              <button onClick={handleLoginClick}>Login</button>
+              <p><a className='register-link' href="/register">Register</a></p>
+            </div>
+          </Card>
+          <div className="pricing-cards-container">
+            <PricingCard title="Daily" price="30" duration="per day" onBook={handlePricingCardBookNowClick} />
+            <PricingCard title="Weekly" price="180" duration="per week" onBook={handlePricingCardBookNowClick} />
+            <PricingCard title="Monthly" price="260" duration="per month" onBook={handlePricingCardBookNowClick} />
+          </div>
+          <MapComponent addresses={addresses} center={mapCenter} zoom={mapZoom} />
+          <div className="button-container">
+            <button onClick={handleShowAddressesClick}>
+              {showAddresses ? 'Hide Locations' : 'Show Locations'}
+            </button>
+          </div>
+          {showAddresses && (
+            <div className="address-cards-container" ref={addressCardsRef}>
+              {addresses.map((address, index) => (
+                <AddressCard
+                  key={index}
+                  address={address}
+                  onClick={handleAddressClick}
+                  onBook={handleBookNowClick}
+                />
+              ))}
+            </div>
+          )}
+          {showBookingModal && (
+            <BookingModal
+              address={selectedAddress}
+              bookingDetails={bookingDetails}
+              onClose={() => setShowBookingModal(false)}
+              onSubmit={handleBookingSubmit}
             />
-          ))}
-        </div>
-      )}
-      {showBookingModal && (
-        <BookingModal
-          address={selectedAddress}
-          bookingDetails={bookingDetails}
-          onClose={() => setShowBookingModal(false)}
-          onSubmit={handleBookingSubmit}
-        />
+          )}
+        </>
       )}
     </div>
   );
