@@ -20,7 +20,7 @@
   "preferredParkingLotLocation": "Preferred Parking Lot Location",
   "paymentInformation": "4. Payment Method - Square",
   "billingAddress": "Billing Address",
-  "paymentMethod": "Payment Method",
+  "paymentMethod": "We use Square for secure transactions.",
   "invoicePreference": "Would you like an invoice or receipt?",
   "companyName": "Company Name (if applicable)",
   "dotNumber": "DOT Number",
