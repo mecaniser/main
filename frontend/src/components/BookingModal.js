@@ -32,9 +32,10 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
     email: '',
     licenseNumber: '',
     truckDetails: '',
-    truckLicensePlate: '',
+    vehicleType: 'Truck and Trailer', // Default value to 'Truck and Trailer'
+    truckUnitNumber: '', // Change truckLicensePlate to truckUnitNumber
     trailerType: '',
-    trailerLicensePlate: '',
+    trailerUnitNumber: '', // Change trailerLicensePlate to trailerUnitNumber
     parkingDuration: bookingDetails ? bookingDetails.duration : '',
     startDate: '',
     endDate: '',
@@ -42,7 +43,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
     billingAddress: '',
     paymentMethod: '',
     invoicePreference: '',
-    companyName: '',
+    businessName: '', // Change companyName to businessName
     dotNumber: '',
     emergencyContact: '',
     termsAgreed: false,
@@ -83,9 +84,9 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
       email: 'john.doe@example.com',
       licenseNumber: 'ABC123456',
       truckDetails: 'Ford F-150, 2020',
-      truckLicensePlate: 'XYZ1234',
+      truckUnitNumber: 'XYZ1234',
       trailerType: 'Flatbed',
-      trailerLicensePlate: 'TRAIL1234',
+      trailerUnitNumber: 'TRAIL1234',
       parkingDuration: 'per day',
       startDate: '2023-10-01',
       endDate: '2023-10-02',
@@ -93,7 +94,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
       billingAddress: '456 Elm St, Anytown, USA',
       paymentMethod: 'Credit Card',
       invoicePreference: 'Email',
-      companyName: 'Doe Trucking Co.',
+      businessName: 'Doe Trucking Co.',
       dotNumber: 'DOT123456',
       emergencyContact: 'Jane Doe, 987-654-3210',
       termsAgreed: false,
@@ -116,6 +117,13 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: '',
+    }));
+  };
+
+  const handleVehicleTypeChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      vehicleType: e.target.value,
     }));
   };
 
@@ -151,9 +159,8 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
         if (!formData.email) newErrors.email = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
         break;
       case 2:
-        if (!formData.truckDetails) newErrors.truckDetails = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
-        if (!formData.truckLicensePlate) newErrors.truckLicensePlate = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
-        if (!formData.trailerLicensePlate) newErrors.trailerLicensePlate = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        if (!formData.truckUnitNumber) newErrors.truckUnitNumber = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
+        if (!formData.trailerUnitNumber) newErrors.trailerUnitNumber = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
         break;
       case 3:
         if (!formData.parkingDuration) newErrors.parkingDuration = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
@@ -226,6 +233,17 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                   />
                 </label>
                 <label>
+                  <FormattedMessage id="businessName" defaultMessage="Business Name" />
+                  <input
+                    type="text"
+                    name="businessName"
+                    value={formData.businessName}
+                    onChange={handleChange}
+                    placeholder="Doe Trucking Co." // Add placeholder
+                    className={errors.businessName ? 'error' : ''}
+                  />
+                </label>
+                <label>
                   <FormattedMessage id="phoneNumber" defaultMessage="Phone Number" />
                   <input
                     type="tel"
@@ -255,59 +273,65 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
               <div className="form-group">
                 <h3><FormattedMessage id="truckVehicleInformation" defaultMessage="2. Truck/Vehicle Information" /></h3>
                 <label>
-                  <FormattedMessage id="truckDetails" defaultMessage="Truck Make, Model, and Year" />
-                  <input
-                    type="text"
-                    name="truckDetails"
-                    value={formData.truckDetails}
-                    onChange={handleChange}
-                    placeholder="Ford F-150, 2020" // Add placeholder
-                    className={errors.truckDetails ? 'error' : ''}
+                  <FormattedMessage id="vehicleType" defaultMessage="Vehicle Type" />
+                  <select
+                    name="vehicleType"
+                    value={formData.vehicleType}
+                    onChange={handleVehicleTypeChange}
+                    className={errors.vehicleType ? 'error' : ''}
                     required
-                  />
+                  >
+                    <option value="Truck">Truck</option>
+                    <option value="Trailer">Trailer</option>
+                    <option value="Truck and Trailer">Truck and Trailer</option>
+                  </select>
                 </label>
-                <label>
-                  <FormattedMessage id="truckLicensePlate" defaultMessage="Truck License Plate Number" />
-                  <input
-                    type="text"
-                    name="truckLicensePlate"
-                    value={formData.truckLicensePlate}
-                    onChange={handleChange}
-                    placeholder="XYZ1234" // Add placeholder
-                    className={errors.truckLicensePlate ? 'error' : ''}
-                    required
-                  />
-                </label>
-                <label>
-                  <FormattedMessage id="trailerLicensePlate" defaultMessage="Trailer License Plate Number" />
-                  <input
-                    type="text"
-                    name="trailerLicensePlate"
-                    value={formData.trailerLicensePlate}
-                    onChange={handleChange}
-                    placeholder="TRAIL1234" // Add placeholder
-                    className={errors.trailerLicensePlate ? 'error' : ''}
-                    required
-                  />
-                </label>
-                {formData.trailerLicensePlate && (
+                {formData.vehicleType !== 'Trailer' && (
                   <label>
-                    <FormattedMessage id="trailerType" defaultMessage="Trailer Type and Size" />
-                    <select
-                      name="trailerType"
-                      value={formData.trailerType}
+                    <FormattedMessage id="truckUnitNumber" defaultMessage="Truck Unit Number" />
+                    <input
+                      type="text"
+                      name="truckUnitNumber"
+                      value={formData.truckUnitNumber}
                       onChange={handleChange}
-                      className={errors.trailerType ? 'error' : ''}
+                      placeholder="XYZ1234" // Add placeholder
+                      className={errors.truckUnitNumber ? 'error' : ''}
                       required
-                    >
-                      <option value="">{formatMessage({ id: 'trailerType', defaultMessage: 'Trailer Type and Size' })}</option>
-                      <option value="Flatbed">Flatbed</option>
-                      <option value="Reefer">Reefer</option>
-                      <option value="Dry Van">Dry Van</option>
-                      <option value="Tanker">Tanker</option>
-                      <option value="Car Transporter">Car Transporter</option>
-                    </select>
+                    />
                   </label>
+                )}
+                {(formData.vehicleType === 'Trailer' || formData.vehicleType === 'Truck and Trailer') && (
+                  <>
+                    <label>
+                      <FormattedMessage id="trailerUnitNumber" defaultMessage="Trailer Unit Number" />
+                      <input
+                        type="text"
+                        name="trailerUnitNumber"
+                        value={formData.trailerUnitNumber}
+                        onChange={handleChange}
+                        placeholder="TRAIL1234" // Add placeholder
+                        className={errors.trailerUnitNumber ? 'error' : ''}
+                        required
+                      />
+                    </label>
+                    <label>
+                      <FormattedMessage id="trailerType" defaultMessage="Trailer Type and Size" />
+                      <select
+                        name="trailerType"
+                        value={formData.trailerType}
+                        onChange={handleChange}
+                        className={errors.trailerType ? 'error' : ''}
+                        required
+                      >
+                        <option value="">{formatMessage({ id: 'trailerType', defaultMessage: 'Trailer Type and Size' })}</option>
+                        <option value="Flatbed">Flatbed</option>
+                        <option value="Reefer">Reefer</option>
+                        <option value="Dry Van">Dry Van</option>
+                        <option value="Tanker">Tanker</option>
+                        <option value="Car Transporter">Car Transporter</option>
+                      </select>
+                    </label>
+                  </>
                 )}
               </div>
             )}
@@ -393,41 +417,6 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
             )}
             {currentStep === 4 && (
               <div className="form-group">
-                <h3><FormattedMessage id="optionalInformation" defaultMessage="4. Optional Information" /></h3>
-                <label>
-                  <FormattedMessage id="companyName" defaultMessage="Company Name (if applicable)" />
-                  <input
-                    type="text"
-                    name="companyName"
-                    value={formData.companyName}
-                    onChange={handleChange}
-                    placeholder="Doe Trucking Co." // Add placeholder
-                  />
-                </label>
-                <label>
-                  <FormattedMessage id="dotNumber" defaultMessage="DOT Number" />
-                  <input
-                    type="text"
-                    name="dotNumber"
-                    value={formData.dotNumber}
-                    onChange={handleChange}
-                    placeholder="DOT123456" // Add placeholder
-                  />
-                </label>
-                <label>
-                  <FormattedMessage id="emergencyContact" defaultMessage="Emergency Contact Name and Number" />
-                  <input
-                    type="text"
-                    name="emergencyContact"
-                    value={formData.emergencyContact}
-                    onChange={handleChange}
-                    placeholder="Jane Doe, 987-654-3210" // Add placeholder
-                  />
-                </label>
-              </div>
-            )}
-            {currentStep === 5 && (
-              <div className="form-group">
                 <p>
                   <FormattedMessage id="paymentMethod" defaultMessage="Payment Method" />
                 </p>
@@ -465,12 +454,12 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                   <FormattedMessage id="previous" defaultMessage="Previous" />
                 </button>
               )}
-              {currentStep < 5 && (
+              {currentStep < 4 && (
                 <button type="button" onClick={nextStep}>
                   <FormattedMessage id="next" defaultMessage="Next" />
                 </button>
               )}
-              {currentStep === 5 && (
+              {currentStep === 4 && (
                 <button id='submit-button' type="button" disabled={isSubmitDisabled} onClick={handlePayNow}>
                   <FormattedMessage id="submit" defaultMessage="Submit and Pay" />
                 </button>
