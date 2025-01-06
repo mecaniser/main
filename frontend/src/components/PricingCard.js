@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/PricingCard.css';
 
 const PricingCard = ({ title, price, duration, onBook }) => {
+  const [showCallInfo, setShowCallInfo] = useState(false);
+
   let priceClass = '';
-  if (price === '30') {
+  if (price === '28') {
     priceClass = 'price-red';
   } else if (price === '180') {
     priceClass = 'price-gold';
@@ -11,12 +13,30 @@ const PricingCard = ({ title, price, duration, onBook }) => {
     priceClass = 'price-green';
   }
 
+  const handleButtonClick = () => {
+    if (price === '260') {
+      setShowCallInfo((prevShowCallInfo) => !prevShowCallInfo);
+    } else {
+      onBook(title, price, duration);
+    }
+  };
+
   return (
     <div className="pricing-card">
-      <h3>{title}</h3>
-      <p className={priceClass}>${price}</p>
-      <p>{duration}</p>
-      <button className={`book-now-button ${priceClass}`} onClick={() => onBook(title, price, duration)}>Book Now</button>
+      {showCallInfo ? (
+        <p className="call-info" onClick={handleButtonClick}>
+          Please call us at <span className="phone-number">123-456-7890</span> for more information.
+        </p>
+      ) : (
+        <div>
+          <h3>{title}</h3>
+          <p className={priceClass}>${price}</p>
+          <p>{duration}</p>
+          <button className={`book-now-button ${priceClass}`} onClick={handleButtonClick}>
+            {price === '260' ? 'Call Now' : 'Book Now'}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

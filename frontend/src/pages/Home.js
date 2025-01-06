@@ -96,7 +96,7 @@ const Home = () => {
             </div>
           </Card>
           <div className="pricing-cards-container">
-            <PricingCard title="Daily" price="30" duration="per day" onBook={handlePricingCardBookNowClick} />
+            <PricingCard title="Daily" price="28" duration="per day" onBook={handlePricingCardBookNowClick} />
             <PricingCard title="Weekly" price="180" duration="per week" onBook={handlePricingCardBookNowClick} />
             <PricingCard title="Monthly" price="260" duration="per month" onBook={handlePricingCardBookNowClick} />
           </div>

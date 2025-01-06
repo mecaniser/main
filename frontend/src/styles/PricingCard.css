@@ -67,6 +67,25 @@
   width: 100%;
 }
 
+.call-info {
+  white-space: wrap;
+  background-color: #2a2a3e; /* Slightly contrasting color */
+  color: white; /* White text color for contrast */
+  padding: 5px;
+  border-radius: 4px;
+  width: 100%; /* Take the entire size of its parent */
+  height: 100%;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  text-align: center; /* Center the text horizontally */
+  display: grid;
+  align-items: center; /* Center the text vertically */
+  justify-content: center; /* Center the text horizontally */
+}
+
+.phone-number {
+  color: #b8860b; /* Dark gold color */
+}
+
 /* Media queries for responsiveness */
 
 /* Small devices (phones, 600px and down) */
