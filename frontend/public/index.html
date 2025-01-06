@@ -5,15 +5,34 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Right Solution Truck Parking Reservation System" />
+    <meta http-equiv="Content-Security-Policy" content="">
+    
+    <!-- Preconnect hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://web.squarecdn.com">
+    
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/rst-logo.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="styles/global.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script> 
+    
+    <!-- Square.js initialization -->
+    <script>
+      window.squareScriptLoaded = false;
+    </script>
+
+    <!-- Load Square.js for development -->
+    <script 
+      id="square-script"
+      src="https://sandbox.web.squarecdn.com/v1/square.js"
+      onload="window.squareScriptLoaded = true;"
+      onerror="console.error('Failed to load Square.js')"
+      async
+      defer
+    ></script>
+
     <title>Right Solution Truck Parking</title>
   </head>
   <body>
