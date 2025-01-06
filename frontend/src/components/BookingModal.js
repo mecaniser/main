@@ -195,7 +195,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder={errors.name || ''}
+                    placeholder="John Doe" // Add placeholder
                     className={errors.name ? 'error' : ''}
                     required
                   />
@@ -207,7 +207,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder={errors.phone || ''}
+                    placeholder="123-456-7890" // Add placeholder
                     className={errors.phone ? 'error' : ''}
                     required
                   />
@@ -219,7 +219,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder={errors.email || ''}
+                    placeholder="john.doe@example.com" // Add placeholder
                     className={errors.email ? 'error' : ''}
                     required
                   />
@@ -236,7 +236,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="truckDetails"
                     value={formData.truckDetails}
                     onChange={handleChange}
-                    placeholder={errors.truckDetails || ''}
+                    placeholder="Ford F-150, 2020" // Add placeholder
                     className={errors.truckDetails ? 'error' : ''}
                     required
                   />
@@ -248,7 +248,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="truckLicensePlate"
                     value={formData.truckLicensePlate}
                     onChange={handleChange}
-                    placeholder={errors.truckLicensePlate || ''}
+                    placeholder="XYZ1234" // Add placeholder
                     className={errors.truckLicensePlate ? 'error' : ''}
                     required
                   />
@@ -260,7 +260,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="trailerLicensePlate"
                     value={formData.trailerLicensePlate}
                     onChange={handleChange}
-                    placeholder={errors.trailerLicensePlate || ''}
+                    placeholder="TRAIL1234" // Add placeholder
                     className={errors.trailerLicensePlate ? 'error' : ''}
                     required
                   />
@@ -330,7 +330,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="startDate"
                     value={formData.startDate}
                     onChange={handleChange}
-                    placeholder={errors.startDate || ''}
+                    placeholder="2023-10-01" // Add placeholder
                     className={errors.startDate ? 'error' : ''}
                     required
                   />
@@ -343,6 +343,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                       name="endDate"
                       value={formData.endDate}
                       onChange={handleChange}
+                      placeholder="2023-10-02" // Add placeholder
                     />
                   </label>
                 )}
@@ -359,6 +360,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                       name="endDate"
                       value={formData.endDate}
                       onChange={handleChange}
+                      placeholder="2023-10-02" // Add placeholder
                     />
                   </label>
                 )}
@@ -374,6 +376,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="companyName"
                     value={formData.companyName}
                     onChange={handleChange}
+                    placeholder="Doe Trucking Co." // Add placeholder
                   />
                 </label>
                 <label>
@@ -383,6 +386,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="dotNumber"
                     value={formData.dotNumber}
                     onChange={handleChange}
+                    placeholder="DOT123456" // Add placeholder
                   />
                 </label>
                 <label>
@@ -392,6 +396,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                     name="emergencyContact"
                     value={formData.emergencyContact}
                     onChange={handleChange}
+                    placeholder="Jane Doe, 987-654-3210" // Add placeholder
                   />
                 </label>
               </div>
