@@ -75,6 +75,31 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
     fetchLocations();
   }, []);
 
+  useEffect(() => {
+    // Preset data for testing
+    setFormData({
+      name: 'John Doe',
+      phone: '123-456-7890',
+      email: 'john.doe@example.com',
+      licenseNumber: 'ABC123456',
+      truckDetails: 'Ford F-150, 2020',
+      truckLicensePlate: 'XYZ1234',
+      trailerType: 'Flatbed',
+      trailerLicensePlate: 'TRAIL1234',
+      parkingDuration: 'per day',
+      startDate: '2023-10-01',
+      endDate: '2023-10-02',
+      parkingLocation: '123 Main St, Anytown, USA',
+      billingAddress: '456 Elm St, Anytown, USA',
+      paymentMethod: 'Credit Card',
+      invoicePreference: 'Email',
+      companyName: 'Doe Trucking Co.',
+      dotNumber: 'DOT123456',
+      emergencyContact: 'Jane Doe, 987-654-3210',
+      termsAgreed: false,
+    });
+  }, []);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === 'checkbox') {
