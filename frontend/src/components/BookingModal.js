@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FormattedMessage, useIntl, IntlProvider } from 'react-intl';
 import axios from 'axios';
-import '../styles/BookingModal.css';
+import PaymentForm from './PaymentForm';
 import messages_en from '../locales/en.json';
 import messages_ru from '../locales/ru.json';
 import messages_ar from '../locales/ar.json';
 import messages_es from '../locales/es.json';
+import '../styles/BookingModal.css';
 
 const messages = {
   en: messages_en,
@@ -19,33 +20,32 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
   const language = navigator.language.split(/[-_]/)[0] || 'en'; // Get the language code or default to 'en'
   const [locale, setLocale] = useState(language);
   const [locations, setLocations] = useState([]); // State to store available locations
+  const [isPaymentValid, setIsPaymentValid] = useState(false);
 
   const handleLanguageChange = (e) => {
     setLocale(e.target.value);
   };
 
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    licenseNumber: '',
-    truckDetails: '',
-    truckLicensePlate: '',
-    trailerType: '',
-    trailerLicensePlate: '',
-    parkingDuration: bookingDetails ? bookingDetails.duration : '',
-    startDate: '',
-    endDate: '',
-    specificNeeds: [],
-    parkingLocation: '',
-    billingAddress: '',
-    paymentMethod: '',
-    invoicePreference: '',
-    companyName: '',
-    dotNumber: '',
-    emergencyContact: '',
+    name: 'John Doe',
+    phone: '123-456-7890',
+    email: 'john.doe@example.com',
+    licenseNumber: 'ABC123456',
+    truckDetails: 'Ford F-150, 2020',
+    truckLicensePlate: 'XYZ1234',
+    trailerType: 'Flatbed',
+    trailerLicensePlate: 'TRAIL1234',
+    parkingDuration: bookingDetails ? bookingDetails.duration : 'per day',
+    startDate: '2023-10-01',
+    endDate: '2023-10-02',
+    parkingLocation: '4613 Statesville Rd, Charlotte, NC 28269',
+    billingAddress: '123 Main St, Anytown, CA 12345',
+    paymentMethod: 'Square',
+    invoicePreference: 'Email',
+    companyName: 'Doe Trucking Co.',
+    dotNumber: 'DOT123456',
+    emergencyContact: 'Jane Doe, 987-654-3210',
     termsAgreed: false,
-    paymentTermsAgreed: false,
   });
 
   const [extendDuration, setExtendDuration] = useState(false);
@@ -78,19 +78,10 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === 'checkbox') {
-      if (name === 'specificNeeds') {
-        setFormData((prevData) => ({
-          ...prevData,
-          specificNeeds: checked
-            ? [...prevData.specificNeeds, value]
-            : prevData.specificNeeds.filter((need) => need !== value),
-        }));
-      } else {
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: checked,
-        }));
-      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: checked,
+      }));
     } else {
       setFormData((prevData) => ({
         ...prevData,
@@ -145,10 +136,6 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
         break;
       case 4:
         break; // Optional information, no validation needed
-      case 5:
-        if (!formData.billingAddress) newErrors.billingAddress = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
-        if (!formData.paymentMethod) newErrors.paymentMethod = formatMessage({ id: 'requiredField', defaultMessage: 'This field is required' });
-        break;
       default:
         break;
     }
@@ -157,6 +144,28 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
   };
 
   const progressPercentage = (currentStep / 5) * 100;
+
+  const handlePaymentSuccess = (data) => {
+    console.log('Payment successful:', data);
+    onSubmit({ address, ...formData });
+  };
+
+  const handlePaymentError = (error) => {
+    console.error('Payment error:', error);
+  };
+
+  const handlePaymentValidation = (isValid) => {
+    setIsPaymentValid(isValid);
+  };
+
+  const handlePayNow = async () => {
+    if (validateStep(currentStep) && isPaymentValid) {
+      const paymentForm = document.getElementById('payment-form');
+      if (paymentForm) {
+        paymentForm.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      }
+    }
+  };
 
   return (
     <IntlProvider locale={locale} messages={messages[locale]}>
@@ -175,7 +184,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
           <div className="progress-bar">
             <div className="progress" style={{ width: `${progressPercentage}%` }}></div>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form id="payment-form" onSubmit={handleSubmit}>
             {currentStep === 1 && (
               <div className="form-group">
                 <h3><FormattedMessage id="driverInformation" defaultMessage="1. Driver Information" /></h3>
@@ -389,34 +398,14 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
             )}
             {currentStep === 5 && (
               <div className="form-group">
-                <h3><FormattedMessage id="paymentInformation" defaultMessage="5. Payment Information" /></h3>
-                <label>
-                  <FormattedMessage id="billingAddress" defaultMessage="Billing Address" />
-                  <input
-                    type="text"
-                    name="billingAddress"
-                    value={formData.billingAddress}
-                    onChange={handleChange}
-                    placeholder={errors.billingAddress || ''}
-                    className={errors.billingAddress ? 'error' : ''}
-                    required
-                  />
-                </label>
-                <label>
+                <p>
                   <FormattedMessage id="paymentMethod" defaultMessage="Payment Method" />
-                  <select
-                    name="paymentMethod"
-                    value={formData.paymentMethod}
-                    onChange={handleChange}
-                    className={errors.paymentMethod ? 'error' : ''}
-                    required
-                  >
-                    <option value="">{formatMessage({ id: 'paymentMethod', defaultMessage: 'Payment Method' })}</option>
-                    <option value="Credit/Debit Card">Credit/Debit Card</option>
-                    <option value="ACH/Bank Transfer">ACH/Bank Transfer</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </label>
+                </p>
+                <PaymentForm
+                  onPaymentSuccess={handlePaymentSuccess}
+                  onPaymentError={handlePaymentError}
+                  // onPaymentValidation={handlePaymentValidation}
+                />
                 <label id="termsAgreedLabel" className="checkbox-label">
                   <div className="terms-container"></div>
                   <input
@@ -452,15 +441,13 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                 </button>
               )}
               {currentStep === 5 && (
-                <button id='submit-button' type="submit" disabled={isSubmitDisabled}>
-                  <FormattedMessage id="submit" defaultMessage="Submit" />
+                <button id='submit-button' type="button" disabled={isSubmitDisabled} onClick={handlePayNow}>
+                  <FormattedMessage id="submit" defaultMessage="Submit and Pay" />
                 </button>
               )}
             </div>
           </form>
-          {formData.specificNeeds.map((need, index) => (
-            <div key={index}>{need}</div>
-          ))}
+          <p>Elis Group</p>
         </div>
       </div>
     </IntlProvider>
