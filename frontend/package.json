@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "env-cmd": "^10.1.0",
     "@react-google-maps/api": "^2.20.5",
     "@square/web-sdk": "^2.0.1",
     "@testing-library/jest-dom": "^5.17.0",
@@ -21,8 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start-no-sourcemaps": "set GENERATE_SOURCEMAP=false && react-scripts start"
+    "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
