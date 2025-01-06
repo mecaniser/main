@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const authRoutes = require('./routes/auth');
 const parkingSpacesRoutes = require('./routes/parkingSpaces');
-const paymentRoutes = require('./routes/payments'); // Import the payments route
+// const paymentRoutes = require('./routes/payments'); // Import the payments route
 require('dotenv').config();
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(cors());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api', parkingSpacesRoutes);
-app.use('/api/payments', paymentRoutes); // Use the payments route
+// app.use('/api/payments', paymentRoutes); // Use the payments route
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, '../frontend/build')));
