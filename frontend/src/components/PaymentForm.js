@@ -18,8 +18,8 @@ const onRenderCallback = (id, phase, actualDuration, baseDuration, startTime, co
 
         // Initialize Square Payments
         const paymentsInstance = window.Square.payments(
-          process.env.REACT_APP_SQ_APPLICATION_ID,
-          process.env.REACT_APP_SQ_LOCATION_ID
+          process.env.SQ_APPLICATION_ID,
+          process.env.SQ_LOCATION_ID
         );
 
         if (!paymentsInstance) {
