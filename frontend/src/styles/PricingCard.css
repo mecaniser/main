@@ -83,7 +83,19 @@
 }
 
 .phone-number {
-  color: #b8860b; /* Dark gold color */
+  color: inherit;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.phone-number:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 /* Media queries for responsiveness */
@@ -117,5 +129,19 @@
   .pricing-card {
     flex: 1 1 calc(25% - 20px); /* One-fourth width for extra large devices */
     margin: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .phone-number {
+    display: block;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    border: none;
+  }
+
+  .phone-number:hover {
+    background-color: #333;
   }
 }
