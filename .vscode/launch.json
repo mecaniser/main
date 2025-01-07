@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "pwa-chrome", // Change this line
+            "type": "chrome", // Change this line
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:3000",
+            "url": "http://localhost:3001",
             "webRoot": "${workspaceFolder}",
             // "userDataDir": "${workspaceFolder}/.vscode/chrome" // Change this line to a specific directory
         }
