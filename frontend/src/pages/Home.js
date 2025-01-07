@@ -89,6 +89,10 @@ const Home = () => {
   };
 
   const addresses = addressesData.addresses;
+  const filteredAddresses = addresses.filter(address => {
+    const addressNumber = address.match(/^\d+/)[0]; // Extract the address number
+    return ['3508', '2200', '1437'].includes(addressNumber); // Filter addresses by number
+  });
 
   return (
     <div className="home-container">
@@ -136,7 +140,7 @@ const Home = () => {
           </div>
           {showAddresses && (
             <div className="address-cards-container" ref={addressCardsRef}>
-              {addresses.map((address, index) => (
+              {filteredAddresses.map((address, index) => (
                 <AddressCard
                   key={index}
                   address={address}
@@ -145,14 +149,6 @@ const Home = () => {
                 />
               ))}
             </div>
-          )}
-          {showBookingModal && (
-            <BookingModal
-              address={selectedAddress}
-              bookingDetails={bookingDetails}
-              onClose={() => setShowBookingModal(false)}
-              onSubmit={handleBookingSubmit}
-            />
           )}
         </>
       )}
