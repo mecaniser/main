@@ -175,7 +175,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const progressPercentage = (currentStep / 5) * 100;
+  const progressPercentage = (currentStep / 4) * 100;
 
   const handlePaymentSuccess = (data) => {
     console.log('Payment successful:', data);
