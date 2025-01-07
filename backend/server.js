@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 
 // Anything that doesn't match the above routes, send back the React index.html file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 // Connect to MongoDB
