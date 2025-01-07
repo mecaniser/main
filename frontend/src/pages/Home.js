@@ -9,6 +9,7 @@ import ServicesCard from '../components/ServicesCard';
 import BookingConfirmation from '../components/BookingConfirmation';
 import addressesData from '../config/addresses.json';
 import '../styles/global.css';
+import StateCard from '../components/StateCard';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -20,6 +21,9 @@ const Home = () => {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [bookingDetails, setBookingDetails] = useState(null);
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
+  const [showPricingCards, setShowPricingCards] = useState(false); // State for showing pricing cards
+  const [showStateCards, setShowStateCards] = useState(true); // State for showing state cards
+  const [selectedState, setSelectedState] = useState(''); // State for storing selected state initials
   const addressCardsRef = useRef(null);
 
   const handleLoginClick = () => {
@@ -65,6 +69,18 @@ const Home = () => {
     setShowBookingModal(true);
   };
 
+  const handleStateCardClick = (state) => {
+    console.log(`State card clicked: ${state}`);
+    setSelectedState(state);
+    setShowPricingCards(true);
+    setShowStateCards(false);
+  };
+
+  const handleBackToStatesClick = () => {
+    setShowPricingCards(false);
+    setShowStateCards(true);
+  };
+
   const handleBookingSubmit = (details) => {
     setBookingDetails(details);
     setShowBookingModal(false);
@@ -95,11 +111,23 @@ const Home = () => {
               <p><a className='register-link' href="/register">Register</a></p>
             </div>
           </Card>
-          <div className="pricing-cards-container">
-            <PricingCard title="Daily" price="28" duration="per day" onBook={handlePricingCardBookNowClick} />
-            <PricingCard title="Weekly" price="180" duration="per week" onBook={handlePricingCardBookNowClick} />
-            <PricingCard title="Monthly" price="260" duration="per month" onBook={handlePricingCardBookNowClick} />
-          </div>
+          {showStateCards && (
+            <div className="state-cards-container">
+              <StateCard title="North Carolina" state="NC" availableLots={20} onClick={handleStateCardClick} />
+              <StateCard title="South Carolina" state="SC" availableLots={10} onClick={handleStateCardClick} />
+              <StateCard title="Colorado" state="CO" availableLots={4} onClick={handleStateCardClick} />
+            </div>
+          )}
+          {showPricingCards && (
+            <>
+              <button onClick={handleBackToStatesClick}>Back to States</button>
+              <div className="pricing-cards-container">
+                <PricingCard title={`Daily (${selectedState})`} price="28" duration="per day" onBook={handlePricingCardBookNowClick} />
+                <PricingCard title={`Weekly (${selectedState})`} price="180" duration="per week" onBook={handlePricingCardBookNowClick} />
+                <PricingCard title={`Monthly (${selectedState})`} price="260" duration="per month" onBook={handlePricingCardBookNowClick} />
+              </div>
+            </>
+          )}
           <MapComponent addresses={addresses} center={mapCenter} zoom={mapZoom} />
           <div className="button-container">
             <button onClick={handleShowAddressesClick}>

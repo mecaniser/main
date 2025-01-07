@@ -1,31 +1,23 @@
 import React, { useState } from 'react';
 import '../styles/StateCard.css';
 
-const StateCard = ({ title, state, availableLots }) => {
+const StateCard = ({ title, state, availableLots, onClick }) => {
   const [showCallInfo, setShowCallInfo] = useState(false);
 
   let stateClass = '';
   if (state === 'NC') {
-    stateClass = 'state-blue';
+    stateClass = 'state-red';
   } else if (state === 'SC') {
-    stateClass = 'state-purple';
+    stateClass = 'state-gold';
   } else if (state === 'CO') {
-    stateClass = 'state-orange';
+    stateClass = 'state-green';
   }
 
-  const handleParagraphClick = () => {
-    setShowCallInfo((prevShowCallInfo) => !prevShowCallInfo);
-  };
-
-  const handlePhoneNumberClick = (e) => {
-    e.stopPropagation();
-  };
-
   return (
-    <div className="state-card">
+    <div className="state-card" onClick={() => onClick(state)}>
       {showCallInfo ? (
-        <p className="call-info" onClick={handleParagraphClick}>
-          Please call us at <a href="tel:123-456-7890" className="phone-number" onClick={handlePhoneNumberClick}>123-456-7890</a> for more information.
+        <p className="call-info">
+          Please call us at <a href="tel:123-456-7890" className="phone-number">123-456-7890</a> for more information.
         </p>
       ) : (
         <div>

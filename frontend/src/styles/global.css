@@ -1,3 +1,17 @@
+:root {
+  /* Lamborghini Colors */
+  --lamborghini-yellow: #FFD700; /* Giallo Orion */
+  --lamborghini-green: #54B948; /* Verde Mantis */
+  --lamborghini-orange: #FF6900; /* Arancio Argos */
+  --lamborghini-blue: #62B1F6; /* Blu Cepheus */
+  --lamborghini-black: #0A0A0A; /* Nero Noctis */
+  --lamborghini-white: #FFFFFF; /* Bianco Monocerus */
+  --lamborghini-red: #B9121B; /* Rosso Mars */
+  --lamborghini-gray: #6D6E71; /* Grigio Telesto */
+}
+
+/* Other global styles */
+
 html, body {
   margin: 0;
   padding: 0;
