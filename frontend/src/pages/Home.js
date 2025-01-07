@@ -70,7 +70,6 @@ const Home = () => {
   };
 
   const handleStateCardClick = (state) => {
-    console.log(`State card clicked: ${state}`);
     setSelectedState(state);
     setShowPricingCards(true);
     setShowStateCards(false);
@@ -149,6 +148,14 @@ const Home = () => {
                 />
               ))}
             </div>
+          )}
+          {showBookingModal && (
+            <BookingModal
+              address={selectedAddress}
+              bookingDetails={bookingDetails}
+              onClose={() => setShowBookingModal(false)}
+              onSubmit={handleBookingSubmit}
+            />
           )}
         </>
       )}
