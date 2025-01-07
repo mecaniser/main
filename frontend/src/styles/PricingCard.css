@@ -98,6 +98,10 @@
   color: #fff;
 }
 
+.pricing-card:hover {
+  background-color: #2a2a3e; /* Slightly lighter background color on hover */
+  transform: scale(1.05); /* Slightly enlarge the card on hover */
+}
 /* Media queries for responsiveness */
 
 /* Small devices (phones, 600px and down) */

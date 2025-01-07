@@ -34,6 +34,11 @@
   background-color: red;
 }
 
+.state-card:hover {
+  background-color: #2a2a3e; /* Slightly lighter background color on hover */
+  transform: scale(1.05); /* Slightly enlarge the card on hover */
+}
+
 .state-card h3 {
   margin-bottom: 8px;
 }
