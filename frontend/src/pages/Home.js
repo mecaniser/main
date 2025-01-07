@@ -119,7 +119,7 @@ const Home = () => {
             <div className="state-cards-container">
               <StateCard title="North Carolina" state="NC" availableLots={20} onClick={handleStateCardClick} />
               <StateCard title="South Carolina" state="SC" availableLots={10} onClick={handleStateCardClick} />
-              <StateCard title="Colorado" state="CO" availableLots={4} onClick={handleStateCardClick} />
+              <StateCard title="Ohio" state="OH" availableLots={4} onClick={handleStateCardClick} />
             </div>
           )}
           {showPricingCards && (

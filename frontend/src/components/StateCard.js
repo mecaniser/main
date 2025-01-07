@@ -9,7 +9,7 @@ const StateCard = ({ title, state, availableLots, onClick }) => {
     stateClass = 'state-red';
   } else if (state === 'SC') {
     stateClass = 'state-gold';
-  } else if (state === 'CO') {
+  } else if (state === 'OH') {
     stateClass = 'state-green';
   }
 
