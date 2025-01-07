@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { IntlProvider } from 'react-intl';
 import './index.css';
+import './styles/global.css'; // Import the global CSS file
 import App from './AppWrapper';
 import reportWebVitals from './reportWebVitals';
 import messages_en from './locales/en.json';
