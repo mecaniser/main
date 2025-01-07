@@ -25,11 +25,15 @@ const PricingCard = ({ title, price, duration, onBook }) => {
     setShowCallInfo((prevShowCallInfo) => !prevShowCallInfo);
   };
 
+  const handlePhoneNumberClick = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <div className="pricing-card">
       {showCallInfo ? (
         <p className="call-info" onClick={handleParagraphClick}>
-          Please call us at <a href="tel:123-456-7890" className="phone-number">123-456-7890</a> for more information.
+          Please call us at <a href="tel:123-456-7890" className="phone-number" onClick={handlePhoneNumberClick}>123-456-7890</a> for more information.
         </p>
       ) : (
         <div>
