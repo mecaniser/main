@@ -25,7 +25,7 @@ const PricingCard = ({ title, price, duration, onBook }) => {
     <div className="pricing-card">
       {showCallInfo ? (
         <p className="call-info" onClick={handleButtonClick}>
-          Please call us at <span className="phone-number">123-456-7890</span> for more information.
+          Please call us at <a href="tel:123-456-7890" className="phone-number">123-456-7890</a> for more information.
         </p>
       ) : (
         <div>
