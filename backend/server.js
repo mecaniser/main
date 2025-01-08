@@ -8,7 +8,6 @@ const https = require('https');
 const authRoutes = require('./routes/auth');
 const parkingSpacesRoutes = require('./routes/parkingSpaces');
 const paymentRoutes = require('./routes/payments'); // Import the payments route
-require('dotenv').config();
 
 const app = express();
 
