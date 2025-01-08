@@ -1,40 +1,44 @@
 const express = require('express');
+const router = express.Router();
 const { Client, Environment } = require('square');
 
-const router = express.Router();
-
+// Initialize Square client
 const client = new Client({
-  environment: Environment.Sandbox, // Sandbox environment
+  environment: Environment.Sandbox,
   accessToken: process.env.SQUARE_ACCESS_TOKEN,
 });
 
-router.post('/process-payment', async (req, res) => {
-  const { sourceId, amount } = req.body;
-  // Validate the amount
-if (typeof amount !== "number") {
-  console.error("Amount is not a number:", amount);
-  return res.status(400).json({ error: "Amount must be a number" });
+// Custom replacer function to handle BigInt values
+function bigintReplacer(key, value) {
+  if (typeof value === 'bigint') {
+    return value.toString();
+  }
+  return value;
 }
 
-// Process payment
-const numericAmount = Number(amount); // Ensure it's a number
+router.post('/process-payment', async (req, res) => {
+  const { sourceId, amount } = req.body;
+
+  // Convert amount to BigInt if necessary
+  const numericAmount = BigInt(amount);
 
   try {
-    const response = await client.paymentsApi.createPayment({
-      sourceId, // Token from frontend
-      idempotencyKey: `${Date.now()}`, // Ensure uniqueness for payment requests
+    const paymentsApi = client.paymentsApi;
+    const response = await paymentsApi.createPayment({
+      sourceId: sourceId,
+      idempotencyKey: new Date().getTime().toString(),
       amountMoney: {
-        amount: numericAmount, // Amount in cents
+        amount: numericAmount,
         currency: 'USD',
       },
     });
 
-    res.status(200).json({ success: true, payment: response.result });
+    // Use the custom replacer function when serializing the response
+    res.status(200).json(JSON.stringify(response.result, bigintReplacer));
   } catch (error) {
-    console.error('Payment failed server side:', error);
+    console.error('Error processing payment:', error);
     res.status(500).json({ error: error.message });
   }
 });
 
 module.exports = router;
- 
