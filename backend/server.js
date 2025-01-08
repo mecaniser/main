@@ -1,10 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
+const https = require('https');
 const authRoutes = require('./routes/auth');
 const parkingSpacesRoutes = require('./routes/parkingSpaces');
-// const paymentRoutes = require('./routes/payments'); // Import the payments route
+const paymentRoutes = require('./routes/payments'); // Import the payments route
 require('dotenv').config();
 
 const app = express();
@@ -20,7 +23,7 @@ app.use(cors());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api', parkingSpacesRoutes);
-// app.use('/api/payments', paymentRoutes); // Use the payments route
+app.use('/api/payments', paymentRoutes); // Use the payments route
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, '../frontend/build')));
@@ -35,6 +38,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
+// Load SSL certificates
+const privateKey = fs.readFileSync('./server.key', 'utf8');
+const certificate = fs.readFileSync('./server.cert', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
@@ -43,6 +51,11 @@ mongoose.connect(process.env.MONGO_URI)
     process.exit(1); // Exit the process with an error code
   });
 
-// Start the server
+// Create HTTPS server
+const httpsServer = https.createServer(credentials, app);
+
+// Start HTTPS server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+httpsServer.listen(PORT, () => {
+  console.log(`HTTPS Server running on port ${PORT}`);
+});

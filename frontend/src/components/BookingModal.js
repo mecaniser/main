@@ -423,7 +423,7 @@ const BookingModal = ({ address, bookingDetails, onClose, onSubmit }) => {
                 <PaymentForm
                   onPaymentSuccess={handlePaymentSuccess}
                   onPaymentError={handlePaymentError}
-                  // onPaymentValidation={handlePaymentValidation}
+                  onPaymentValidation={handlePaymentValidation}
                 />
                 <label id="termsAgreedLabel" className="checkbox-label">
                   <div className="terms-container"></div>
