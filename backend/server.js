@@ -3,8 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const fs = require('fs');
-const https = require('https');
+const http = require('http');
 const authRoutes = require('./routes/auth');
 const parkingSpacesRoutes = require('./routes/parkingSpaces');
 const paymentRoutes = require('./routes/payments'); // Import the payments route
@@ -37,11 +36,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
-// Load SSL certificates
-const privateKey = fs.readFileSync('./server.key', 'utf8');
-const certificate = fs.readFileSync('./server.cert', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
-
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
@@ -50,11 +44,13 @@ mongoose.connect(process.env.MONGO_URI)
     process.exit(1); // Exit the process with an error code
   });
 
-// Create HTTPS server
-const httpsServer = https.createServer(credentials, app);
+// Create HTTP server
+const httpServer = http.createServer(app);
 
-// Start HTTPS server
+// Start HTTP server
 const PORT = process.env.PORT || 5000;
-httpsServer.listen(PORT, () => {
-  console.log(`HTTPS Server running on port ${PORT}`);
+console.log("🚀 ~ PORT:", PORT)
+
+httpServer.listen(PORT, () => {
+  console.log(`HTTP Server running on port ${PORT}`);
 });

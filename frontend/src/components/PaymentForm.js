@@ -1,5 +1,4 @@
 import React, { useEffect, useState, memo, Profiler } from "react";
-import "../styles/global.css";
 import { initializeSquarePayments } from "../helpers/squarePaymentsHelper";
 
 const PaymentForm = ({ onPaymentSuccess, onPaymentError }) => {
@@ -38,7 +37,7 @@ const PaymentForm = ({ onPaymentSuccess, onPaymentError }) => {
 
     if (tokenResult.status === "OK") {
       try {
-        const response = await fetch("https://localhost:3000/api/payments/process-payment", {
+        const response = await fetch("/api/payments/process-payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
